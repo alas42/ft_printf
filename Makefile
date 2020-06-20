@@ -11,9 +11,7 @@
 # **************************************************************************** #
 
 NAME = libftprintf.a
-SOURCES = ft_printf.c ft_check_flags.c ft_type_d.c ft_type_csp.c\
-	  ft_type_x.c ft_type_u.c ft_dec_to_str.c fill_result_u.c\
-	  fill_result_p.c fill_result_x.c
+SOURCES = ft_printf.c 
 CC = gcc
 CFLAGS = -Werror -Wall -Wextra
 LIBFT = libft

@@ -19,25 +19,42 @@
 # include <stdarg.h>
 # include "../libft/libft.h"
 
+/*
+ * Using the same names as the one from tutorialspoint 
+ * Flags are 0 - # + ' '
+ * Specifiers are csdiouxX
+ * Width and precision are self-explanatory
+ *  
+ * ap is the list of argument
+ * len is the number of character that was printed
+ * i is the actual position on the virtual cursor as we process what 
+ * is stored in format
+ */
+
+typedef struct	s_tab
+{
+	const char  *format;
+	char	    *f_copy;
+	char	    *f_treat;
+	va_list	    ap;
+	int		    len;
+	size_t	    i;
+	char		*specifiers;
+	char		*flags;
+    t_arg       argument;    
+}               t_tab;
+
+typedef struct  s_arg
+{
+    char		flags[6];
+    long int	width;
+    long int	precision;
+	char		specifier;
+}               t_arg;
+
 int		ft_printf(const char *format, ...);
-int		ft_printf2(const char *format, ...);
-int		check_format(const char *format, va_list ap);
-int		check_string(char *s, va_list ap);
-void	check_attribut(int *flags, char *s, int *i);
-int		check_precision(char *s, int *i);
-int		check_champ(char *s, int *i);
-int		check_conversion(char *s, int *i);
-int		ft_redirection(int *attr, int *flags, int type, va_list ap);
-char	*get_string_u(int *param, int *attr, char *result);
-char	*get_string_p(int *param, int *attr, char *result);
-char	*get_string_x(int *param, int *attr, char *result);
-char	*ft_type_c(int *flags, int champ, va_list ap);
-char	*ft_type_s(int *flags, int champ, int prec, va_list ap);
-char	*ft_type_p(int *flags, int champ, int prec, va_list ap);
-char	*ft_type_d(int *flags, int champ, int prec, va_list ap);
-char	*ft_type_i(int *flags, int champ, int prec, va_list ap);
-char	*ft_type_u(int *flags, int champ, int prec, va_list ap);
-char	*ft_type_x(int *flags, int champ, int prec, va_list ap);
-char	*ft_type_xmaj(int *flags, int champ, int prec, va_list ap);
-char	*ft_double_to_str(double d, int prec);
+t_tab   set_tab(t_tab *tab);
+int     parse_fomat(t_tab *tab);
+t_tab   set_arg(t_tab *tab);
+int     parse_arg(t_tab *tab);
 #endif
