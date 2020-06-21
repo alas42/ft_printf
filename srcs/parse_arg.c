@@ -44,6 +44,14 @@ t_tab   *check_specifier(t_tab *tab)
     static char specifiers[] = "csdiuxX\0";
     int         i;
 
+    i = 0;
+    while (specifiers[i] != '\0')
+        i++;
+    return (tab);
+}
+
+t_tab   *redirect(t_tab *tab)
+{
     return (tab);
 }
 
@@ -51,7 +59,7 @@ int     parse_arg(t_tab *tab)
 {
     check_flags(tab);
     check_field_width(tab);
-    check_preicision(tab);
+    check_precision(tab);
     check_specifier(tab);
     redirect(tab);
     return (tab->len);
