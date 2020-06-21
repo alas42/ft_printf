@@ -29,29 +29,82 @@ t_tab   *check_flags(t_tab *tab)
 
 t_tab   *check_field_width(t_tab *tab)
 {
-
+    if (tab->t_diff[tab->i] == '*')
+    {
+        tab->argument->field_width = (long int)va_arg(tab->ap, int);
+        tab->i++;
+    }
+    else if (tab->t_diff[tab->i] >= '0' && tab->t_diff[tab->i] <= '9')
+    {
+        while (tab->t_diff[tab->i] >= '0' && tab->t_diff[tab->i] <= '9')
+        {
+            tab->argument->field_width *= 10;
+            tab->argument->field_width += tab->t_diff[tab->i];
+            tab->i++;
+        }
+    }
     return (tab);
 }
 
 t_tab   *check_precision(t_tab *tab)
 {
-
+    if (tab->t_diff[tab->i] == '.')
+    {
+        tab->i++;
+        if (tab->t_diff[tab->i] == '*')
+        {
+            tab->argument->precision = (long int)va_arg(tab->ap, int);
+            tab->argument->precision = (tab->argument->precision < -1) ? -1 : tab->argument->precision;
+            tab->i++;
+        }
+        else if (tab->t_diff[tab->i] >= '0' && tab->t_diff[tab->i] <= '9')
+        {
+            while (tab->t_diff[tab->i] >= '0' && tab->t_diff[tab->i] <= '9')
+            {
+                tab->argument->precision *= 10;
+                tab->argument->precision += tab->t_diff[tab->i];
+                tab->i++;
+            }
+        }
+        else
+            tab->argument->precision = 0;
+    }
     return (tab);
 }
 
 t_tab   *check_specifier(t_tab *tab)
 {
-    static char specifiers[] = "csdiuxX\0";
+    static char specifiers[] = "diuxXcsp\0";
     int         i;
 
     i = 0;
     while (specifiers[i] != '\0')
+    {
+        if (specifiers[i] == tab->f_diff[tab->i])
+        {
+            tab->argument->specifier = specifiers[i];
+            tab->argument->redirector = i;
+        }
         i++;
+    }
     return (tab);
 }
 
 t_tab   *redirect(t_tab *tab)
 {
+    char	*(*redirection[9])(t_tab *tab);
+	char	*piece_string;
+
+	redirection[0] = ft_type_d;
+	redirection[1] = ft_type_i;
+	redirection[2] = ft_type_u;
+	redirection[3] = ft_type_x;
+	redirection[4] = ft_type_xmaj;
+    redirection[5] = ft_type_c;
+    redirection[6] = ft_type_s;
+    redirection[7] = ft_type_p;
+	redirection[8] = NULL;
+    redirection[tab->argument->redirector](tab);
     return (tab);
 }
 

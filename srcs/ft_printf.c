@@ -22,8 +22,9 @@ t_tab	*set_arg(t_tab *tab)
 	while (++i < 6)
 		tab->argument->flags[i] = '\0';
 	tab->argument->precision = -1;
-	tab->argument->width = 0;
+	tab->argument->field_width = 0;
 	tab->argument->specifier = '\0';
+	tab->argument->redirector = -1;
 	printf("tab->argument->precision : %ld\ntab->argument->width : %ld\ntab->argument->specifier : %c\n",	tab->argument->precision, tab->argument->width, tab->argument->specifier);
 	return (tab);
 }
