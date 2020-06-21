@@ -25,7 +25,7 @@ t_tab	*set_arg(t_tab *tab)
 	tab->argument->field_width = 0;
 	tab->argument->specifier = '\0';
 	tab->argument->redirector = -1;
-	printf("tab->argument->precision : %ld\ntab->argument->width : %ld\ntab->argument->specifier : %c\n",	tab->argument->precision, tab->argument->width, tab->argument->specifier);
+	printf("tab->argument->precision : %ld\ntab->argument->width : %ld\ntab->argument->specifier : %c\n",	tab->argument->precision, tab->argument->field_width, tab->argument->specifier);
 	return (tab);
 }
 
