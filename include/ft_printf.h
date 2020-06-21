@@ -6,7 +6,7 @@
 /*   By: avogt <avogt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 16:03:26 by avogt             #+#    #+#             */
-/*   Updated: 2020/06/19 16:16:22 by avogt            ###   ########.fr       */
+/*   Updated: 2020/06/21 14:06:33 by avogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,6 @@
  * is stored in format
  */
 
-typedef struct	s_tab
-{
-	const char  *format;
-	char	    *f_copy;
-	char	    *f_treat;
-	va_list	    ap;
-	int		    len;
-	size_t	    i;
-	char		*specifiers;
-	char		*flags;
-    t_arg       argument;    
-}               t_tab;
-
 typedef struct  s_arg
 {
     char		flags[6];
@@ -51,6 +38,19 @@ typedef struct  s_arg
     long int	precision;
 	char		specifier;
 }               t_arg;
+
+typedef struct	s_tab
+{
+	const char  	*format;
+	char	    	*f_copy;
+	char	    	*f_treat;
+	va_list			 ap;
+	int		    	len;
+	size_t	    	i;
+	char			*specifiers;
+	char			*flags;
+    t_arg			*argument;    
+}               t_tab;
 
 int		ft_printf(const char *format, ...);
 t_tab   *set_tab(t_tab *tab);

@@ -6,7 +6,7 @@
 /*   By: avogt <avogt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 16:43:31 by avogt             #+#    #+#             */
-/*   Updated: 2020/06/19 16:49:20 by avogt            ###   ########.fr       */
+/*   Updated: 2020/06/21 14:20:20 by avogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,14 @@ t_tab	*set_arg(t_tab *tab)
 	int i;
 
 	i = -1;
+	if (!(tab->argument = (t_arg*)malloc(sizeof(t_arg))))
+		return (NULL);
 	while (++i < 6)
-		tab->argument.flags[i] = '\0';
-	tab->argument.precision = -1;
-	tab->argument.width = 0;
-	tab->argument.specifier = '\0';
+		tab->argument->flags[i] = '\0';
+	tab->argument->precision = -1;
+	tab->argument->width = 0;
+	tab->argument->specifier = '\0';
+	printf("tab->argument->precision : %ld\ntab->argument->width : %ld\ntab->argument->specifier : %c\n",	tab->argument->precision, tab->argument->width, tab->argument->specifier);
 	return (tab);
 }
 
@@ -32,15 +35,22 @@ t_tab	*set_tab(t_tab *tab)
 	tab->specifiers = "csdiouxX";
 	tab->flags = "+-#0 ";
 	tab->f_copy = (char *)tab->format;
-	return (tab);
+	/*
+	 *
+	 * printf("normally, everythings set in t_tab\nf_copy = %s\n", tab->f_copy);
+	 */
+	 return (tab);
 }
 
 int		parse_format(t_tab *tab)
 {
-	while (tab->f_copy[tab->i] == '\0')
+	while (tab->f_copy[tab->i] != '\0')
 	{
 		if (tab->f_copy[tab->i] == '%')
 		{
+			/*
+			 * printf("%% found\n");
+			 */ 
 			tab->i++;
 			set_arg(tab);
 			parse_arg(tab);
@@ -52,7 +62,7 @@ int		parse_format(t_tab *tab)
 		}
 		tab->i++;
 	}
-	return (tab->len)
+	return (tab->len);
 }
 
 int		ft_printf(const char *format, ...)
@@ -65,8 +75,9 @@ int		ft_printf(const char *format, ...)
 	tab = set_tab(tab);
 	if (format) 
 	{
+		printf("format good\n");
 		va_start(tab->ap, format);
-		tab->len = parse(tab);
+		tab->len = parse_format(tab);
 		va_end(tab->ap);
 	}
 	free(tab);
