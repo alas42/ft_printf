@@ -92,8 +92,7 @@ t_tab   *check_specifier(t_tab *tab)
 
 t_tab   *redirect(t_tab *tab)
 {
-    char	*(*redirection[9])(t_tab *tab);
-	char	*piece_string;
+    t_tab	*(*redirection[9])(t_tab *tab);
 
 	redirection[0] = handle_d;
 	redirection[1] = handle_i;
