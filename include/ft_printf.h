@@ -53,8 +53,8 @@ typedef struct  s_arg
 }               t_arg;
 
 int		ft_printf(const char *format, ...);
-t_tab   set_tab(t_tab *tab);
+t_tab   *set_tab(t_tab *tab);
 int     parse_fomat(t_tab *tab);
-t_tab   set_arg(t_tab *tab);
+t_tab   *set_arg(t_tab *tab);
 int     parse_arg(t_tab *tab);
 #endif

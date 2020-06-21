@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-t_tab	set_arg(t_tab *tab)
+t_tab	*set_arg(t_tab *tab)
 {
 	int i;
 
@@ -25,7 +25,7 @@ t_tab	set_arg(t_tab *tab)
 	return (tab);
 }
 
-t_tab	set_tab(t_tab *tab)
+t_tab	*set_tab(t_tab *tab)
 {
 	tab->i = 0;
 	tab->len = 0;
