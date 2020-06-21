@@ -11,7 +11,8 @@
 # **************************************************************************** #
 
 NAME = libftprintf.a
-SOURCES = ft_printf.c parse_arg.c
+SOURCES = ft_printf.c parse_arg.c handle_c.c handle_s.c handle_p.c\
+	handle_d.c handle_i.c handle_u.c handle_xlow.c handle_xup.c
 CC = gcc
 CFLAGS = -Werror -Wall -Wextra
 LIBFT = libft
