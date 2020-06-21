@@ -12,6 +12,19 @@
 
 #include "ft_printf.h"
 
+t_tab	set_arg(t_tab *tab)
+{
+	int i;
+
+	i = -1;
+	while (++i < 6)
+		tab->argument.flags[i] = '\0';
+	tab->argument.precision = -1;
+	tab->argument.width = 0;
+	tab->argument.specifier = '\0';
+	return (tab);
+}
+
 t_tab	set_tab(t_tab *tab)
 {
 	tab->i = 0;
@@ -28,6 +41,7 @@ int		parse_format(t_tab *tab)
 	{
 		if (tab->f_copy[tab->i] == '%')
 		{
+			tab->i++;
 			set_arg(tab);
 			parse_arg(tab);
 		}
