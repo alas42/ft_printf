@@ -25,6 +25,12 @@ int	main(void)
 	c = 'l';
 	ft_printf("%u\n", test);
 	printf("%u\n", test);
+	ft_printf("%-5u\n", test);
+	printf("%-5u\n", test);
+	ft_printf("%05u\n", test);
+	printf("%05u\n", test);
+	ft_printf("%-05u\n", test);
+	printf("%-05u\n", test);
 	ft_printf("%30u\n", test);
 	printf("%30u\n", test);
 	ft_printf("%.5u\n", test);
