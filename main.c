@@ -6,7 +6,7 @@
 /*   By: avogt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 16:36:52 by avogt             #+#    #+#             */
-/*   Updated: 2020/06/21 16:23:14 by avogt            ###   ########.fr       */
+/*   Updated: 2020/06/22 14:52:39 by avogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,19 @@
 int	main(void)
 {
 	char	c;
-	int		champ;
-	
-	champ = 30;
+	unsigned int test;
+	int champ;
+	int precision;
+
+	champ = 10;
+	precision = 5;
+	test = 30;
 	c = 'l';
-	ft_printf("%30c\n", c);
-	printf("ft_printf :\n");
-	ft_printf("p4 %.5s\n", "aaaaa");
-	printf("printf : \n");
-	printf("p4 %ds\n fegzf g ygfezgf %s\n", 4, "aaaaa");
-	printf("%+*d\n", -5, -50);
-	printf("%+-*d\n", 5, -50);
-	printf("%-5d\n", -50);
+	ft_printf("%u\n", test);
+	printf("%u\n", test);
+	ft_printf("%30u\n", test);
+	printf("%30u\n", test);
+	ft_printf("%.5u\n", test);
+	printf("%.5u\n", test);
 	return (0);
 }

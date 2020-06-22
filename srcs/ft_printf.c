@@ -6,7 +6,7 @@
 /*   By: avogt <avogt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 16:43:31 by avogt             #+#    #+#             */
-/*   Updated: 2020/06/21 14:20:20 by avogt            ###   ########.fr       */
+/*   Updated: 2020/06/22 14:56:39 by avogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ t_tab	*set_arg(t_tab *tab)
 	tab->argument->field_width = 0;
 	tab->argument->specifier = '\0';
 	tab->argument->redirector = -1;
-	printf("tab->argument->precision : %ld\ntab->argument->width : %ld\ntab->argument->specifier : %c\n",	tab->argument->precision, tab->argument->field_width, tab->argument->specifier);
+	/*
+	 * printf("tab->argument->precision : %ld\ntab->argument->width : %ld\ntab->argument->specifier : %c\n",	tab->argument->precision, tab->argument->field_width, tab->argument->specifier);
+	 */
 	return (tab);
 }
 
@@ -77,7 +79,9 @@ int		ft_printf(const char *format, ...)
 	tab = set_tab(tab);
 	if (format) 
 	{
-		printf("format good\n");
+		/*
+		 * printf("format good\n");
+		 */
 		va_start(tab->ap, format);
 		tab->len = parse_format(tab);
 		va_end(tab->ap);
