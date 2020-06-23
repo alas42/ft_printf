@@ -34,5 +34,26 @@ int	main(void)
 	ft_printf("%05u\n", test);
 	printf("%05u\n", test);
 	
+	ft_printf("%x\n", test);
+	printf("%x\n", test);
+	ft_printf("%5x\n", test);
+	printf("%5x\n", test);
+	ft_printf("%.5x\n", test);
+	printf("%.5x\n", test);
+	ft_printf("%-5x\n", test);
+	printf("%-5x\n", test);
+	ft_printf("%05x\n", test);
+	printf("%05x\n", test);
+
+	ft_printf("%X\n", test);
+	printf("%X\n", test);
+	ft_printf("%5X\n", test);
+	printf("%5X\n", test);
+	ft_printf("%.5X\n", test);
+	printf("%.5X\n", test);
+	ft_printf("%-5X\n", test);
+	printf("%-5X\n", test);
+	ft_printf("%05X\n", test);
+	printf("%05X\n", test);
 	return (0);
 }
