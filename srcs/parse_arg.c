@@ -39,7 +39,7 @@ t_tab   *check_field_width(t_tab *tab)
         while (tab->f_diff[tab->i] >= '0' && tab->f_diff[tab->i] <= '9')
         {
             tab->argument->field_width *= 10;
-            tab->argument->field_width += tab->f_diff[tab->i];
+            tab->argument->field_width += (tab->f_diff[tab->i] - 48);
             tab->i++;
         }
     }
@@ -62,7 +62,7 @@ t_tab   *check_precision(t_tab *tab)
             while (tab->f_diff[tab->i] >= '0' && tab->f_diff[tab->i] <= '9')
             {
                 tab->argument->precision *= 10;
-                tab->argument->precision += tab->f_diff[tab->i];
+                tab->argument->precision += (tab->f_diff[tab->i] - 48);
                 tab->i++;
             }
         }
