@@ -55,5 +55,16 @@ int	main(void)
 	printf("%-5X\n", test);
 	ft_printf("%05X\n", test);
 	printf("%05X\n", test);
+
+	ft_printf("%c\n", c);
+	printf("%c\n", c);
+	ft_printf("%5c\n", c);
+	printf("%5c\n", c);
+	ft_printf("%.5c\n", c);
+	printf("%.5c\n", c);
+	ft_printf("%-5c\n", c);
+	printf("%-5c\n", c);
+	ft_printf("%05c\n", c);
+	printf("%05c\n", c);
 	return (0);
 }
