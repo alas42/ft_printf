@@ -10,12 +10,12 @@ t_tab   *check_flags(t_tab *tab)
     {
         while (tab->f_diff[tab->i] == flags[i])
         {
-            while (flags[i] == '-')
+            while (tab->f_diff[tab->i] == '-')
             {
                 tab->argument->flags[0] = '-';
                 tab->i++;
             }
-            while (flags[i] == '0')
+            while (tab->f_diff[tab->i] == '0')
             {
                 tab->argument->flags[1] = '0';  
                 tab->i++;
