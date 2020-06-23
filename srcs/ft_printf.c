@@ -35,8 +35,6 @@ t_tab	*set_tab(t_tab *tab)
 {
 	tab->i = 0;
 	tab->len = 0;
-	tab->specifiers = "csdiouxX";
-	tab->flags = "+-#0 ";
 	tab->f_copy = (char *)tab->format;
 	tab->f_diff = (char *)tab->format;
 	/*

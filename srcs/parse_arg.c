@@ -98,8 +98,8 @@ t_tab   *redirect(t_tab *tab)
 	redirection[0] = handle_d;
 	redirection[1] = handle_i;
 	redirection[2] = handle_u;
-	redirection[3] = handle_xlow;
-	redirection[4] = handle_xup;
+	redirection[3] = handle_x;
+	redirection[4] = handle_x;
     redirection[5] = handle_c;
     redirection[6] = handle_s;
     redirection[7] = handle_p;

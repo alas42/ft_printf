@@ -51,8 +51,6 @@ typedef struct	s_tab
 	va_list			 ap;
 	int		    	len;
 	size_t	    	i;
-	char			*specifiers;
-	char			*flags;
     t_arg			*argument;    
 }               t_tab;
 
@@ -68,8 +66,7 @@ t_tab	*check_specifier(t_tab *tab);
 t_tab	*handle_d(t_tab *tab);
 t_tab	*handle_i(t_tab *tab);
 t_tab	*handle_u(t_tab *tab);
-t_tab	*handle_xlow(t_tab *tab);
-t_tab	*handle_xup(t_tab *tab);
+t_tab	*handle_x(t_tab *tab);
 t_tab	*handle_c(t_tab *tab);
 t_tab	*handle_s(t_tab *tab);
 t_tab	*handle_p(t_tab *tab);
