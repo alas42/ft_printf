@@ -6,7 +6,7 @@
 /*   By: avogt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 16:19:33 by avogt             #+#    #+#             */
-/*   Updated: 2020/06/21 16:20:02 by avogt            ###   ########.fr       */
+/*   Updated: 2020/06/23 15:01:45 by avogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,10 @@ t_tab	*handle_x(t_tab *tab)
 	printf("arg_to_print : --%s-- len_arg : --%ld-- field_width : --%ld-- precision : --%ld--\n", arg_to_print, (long int)ft_strlen(arg_to_print), tab->argument->field_width, tab->argument->precision);
 	s = get_string_x(arg_to_print, tab, (long int)ft_strlen(arg_to_print));
 	len_to_print = ft_strlen(s);
-	s = (tab->argument->specifier == 'X') ? ft_toupper(s) : ft_tolower(s);
+	if (tab->argument->specifier == 'X')
+		ft_strup(s);
+	else
+		ft_strlow(s);
 	ft_putstr(s);
 	free(s);
 	free(arg_to_print);
