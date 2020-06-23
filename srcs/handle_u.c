@@ -87,9 +87,10 @@ t_tab		*handle_u(t_tab *tab)
 
 	len_to_print = 0;
 	arg_to_print = ft_itoa(va_arg(tab->ap, unsigned int));
+	printf("arg_to_print : %s -- \n", arg_to_print);
 	s = get_string_u(arg_to_print, tab, (long int)ft_strlen(arg_to_print));
 	len_to_print = ft_strlen(s);
-	write(1, s, len_to_print);
+	ft_putstr(s);
 	free(s);
 	free(arg_to_print);
 	return (tab);
