@@ -43,6 +43,8 @@ t_tab	*handle_s(t_tab *tab)
 			s[i] = ' ';
 	ft_putstr(s);
 	free(s);
-	free(copy_arg);
+	/*
+	 *free(copy_arg);
+	 */
 	return (tab);
 }
