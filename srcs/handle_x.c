@@ -96,6 +96,9 @@ t_tab	*handle_x(t_tab *tab)
 		ft_strlow(s);
 	ft_putstr(s);
 	free(s);
-	free(arg_to_print);
+	/*
+	 * is no string but buffer
+	 * free(arg_to_print);
+	 */
 	return (tab);
 }
