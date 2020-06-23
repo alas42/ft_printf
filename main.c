@@ -6,7 +6,7 @@
 /*   By: avogt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 16:36:52 by avogt             #+#    #+#             */
-/*   Updated: 2020/06/22 14:52:39 by avogt            ###   ########.fr       */
+/*   Updated: 2020/06/23 14:17:19 by avogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,14 @@ int	main(void)
 	c = 'l';
 	ft_printf("%u\n", test);
 	printf("%u\n", test);
+	ft_printf("%5u\n", test);
+	printf("%5u\n", test);
+	ft_printf("%.5u\n", test);
+	printf("%.5u\n", test);
 	ft_printf("%-5u\n", test);
 	printf("%-5u\n", test);
 	ft_printf("%05u\n", test);
 	printf("%05u\n", test);
-	ft_printf("%-05u\n", test);
-	printf("%-05u\n", test);
-	ft_printf("%30u\n", test);
-	printf("%30u\n", test);
-	ft_printf("%.5u\n", test);
-	printf("%.5u\n", test);
+	
 	return (0);
 }
