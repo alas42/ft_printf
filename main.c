@@ -6,7 +6,7 @@
 /*   By: avogt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 16:36:52 by avogt             #+#    #+#             */
-/*   Updated: 2020/06/23 14:17:19 by avogt            ###   ########.fr       */
+/*   Updated: 2020/06/23 15:16:29 by avogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ int	main(void)
 	printf("%c\n", c);
 	ft_printf("%5c\n", c);
 	printf("%5c\n", c);
-	ft_printf("%.5c\n", c);
-	printf("%.5c\n", c);
 	ft_printf("%-5c\n", c);
 	printf("%-5c\n", c);
-	ft_printf("%05c\n", c);
-	printf("%05c\n", c);
+	ft_printf("%-5c 0\n", c);
+	printf("%-5c 0\n", c);
+	ft_printf("%5c 45\n", c);
+	printf("%5c 45\n", c);
 	return (0);
 }
