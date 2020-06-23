@@ -51,6 +51,7 @@ t_tab   *check_precision(t_tab *tab)
     if (tab->f_diff[tab->i] == '.')
     {
         tab->i++;
+        tab->argument->precision = 0;
         if (tab->f_diff[tab->i] == '*')
         {
             tab->argument->precision = (long int)va_arg(tab->ap, int);
