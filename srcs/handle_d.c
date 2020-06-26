@@ -6,7 +6,7 @@
 /*   By: avogt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 16:17:29 by avogt             #+#    #+#             */
-/*   Updated: 2020/06/21 16:24:00 by avogt            ###   ########.fr       */
+/*   Updated: 2020/06/26 21:07:52 by avogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ t_tab	*handle_d(t_tab *tab)
 		s[i++] = result[j++];
 	if (tab->argument->flags[0])
 		if (tab->argument->field_width > length_result)
-			while (i < champ)
+			while (i < tab->argument->field_width)
 				s[i++] = ' ';
 	ft_putstr(s);
 	ft_strdel(&s);

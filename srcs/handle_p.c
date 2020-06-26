@@ -6,7 +6,7 @@
 /*   By: avogt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 16:16:46 by avogt             #+#    #+#             */
-/*   Updated: 2020/06/21 16:17:21 by avogt            ###   ########.fr       */
+/*   Updated: 2020/06/26 21:14:31 by avogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	fill_result2(char *string, t_tab *tab, char *arg, long int pos)
 	}
 	j = 0;
 	while (j < len_arg)
-		string[i++] = result[j++];
+		string[i++] = arg[j++];
 	if (tab->argument->flags[0])
 		if (tab->argument->field_width > len_arg)
 			while (i < tab->argument->field_width)
@@ -100,11 +100,12 @@ t_tab	*handle_p(t_tab *tab)
 
 	len_to_print = 0;
 	arg_to_print = ft_convert_base_l((unsigned long int)va_arg(tab->ap, void *), 16);
-	printf("arg_to_print : --%s-- len_arg : --%ld-- field_width : --%ld-- precision : --%ld--\n", arg_to_print, (long int)ft_strlen(arg_to_print), tab->argument->field_width, tab->argument->precision);
+	/*
+	 * printf("arg_to_print : --%s-- len_arg : --%ld-- field_width : --%ld-- precision : --%ld--\n", arg_to_print, (long int)ft_strlen(arg_to_print), tab->argument->field_width, tab->argument->precision);
+	 */
 	s = get_string_p(arg_to_print, tab, (long int)ft_strlen(arg_to_print));
 	len_to_print = ft_strlen(s);
 	ft_putstr(s);
 	free(s);
-	free(arg_to_print);
 	return (tab);
 }

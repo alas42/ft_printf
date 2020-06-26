@@ -6,7 +6,7 @@
 /*   By: avogt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 16:36:52 by avogt             #+#    #+#             */
-/*   Updated: 2020/06/23 15:39:22 by avogt            ###   ########.fr       */
+/*   Updated: 2020/06/26 21:13:26 by avogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,28 @@ int	main(void)
 	printf("%-s 0\n", s);
 	ft_printf("%.5s 45\n", s);
 	printf("%.5s 45\n", s);
+	
+	ft_printf("%d\n", test);
+	printf("%d\n", test);
+	ft_printf("%5d\n", test);
+	printf("%5d\n", test);
+	ft_printf("%-5d\n", test);
+	printf("%-5d\n", test);
+	ft_printf("%-d 0\n", test);
+	printf("%-d 0\n", test);
+	ft_printf("%.d 45\n", test);
+	printf("%.d 45\n", test);
+
+	ft_printf("%p\n", &test);
+	printf("%p\n", &test);
+	ft_printf("%5p\n", &test);
+	printf("%5p\n", &test);
+	ft_printf("%-5p\n", &test);
+	printf("%-5p\n", &test);
+	ft_printf("%-p 0\n", &test);
+	printf("%-p 0\n", &test);
+	ft_printf("%45p 45\n", &test);
+	printf("%45p 45\n", &test);
+	
 	return (0);
 }
