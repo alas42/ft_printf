@@ -79,14 +79,14 @@ static int fill_string(char *string, t_tab *tab, char *arg, char signe)
 	return (1);
 }
 
-static char	*get_string_d(char *arg, t_tab *tab)
+static char	*get_string_d(char *arg_to_print, t_tab *tab, int arg)
 {
 	char		*string;
 	long int	len_arg;
 	char		signe;
 
 	signe = (arg < 0) ? '-' : '+';
-	len_arg = (long int) ft_strlen(arg);
+	len_arg = (long int) ft_strlen(arg_to_print);
 	len_arg = (signe == '-') ? len_arg -1 : len_arg;
 	string = NULL;
 	if (tab->argument->field_width >= tab->argument->precision
@@ -101,7 +101,7 @@ static char	*get_string_d(char *arg, t_tab *tab)
 	else
 		string = ft_strnew(len_arg);
 	return (string);
-	if (fill_string(string, tab, arg, signe))
+	if (fill_string(string, tab, arg_to_print, signe))
 		return (string);
 	else
 		return (NULL);
@@ -117,7 +117,8 @@ t_tab		*handle_d(t_tab *tab)
 	len_to_print = 0;
 	arg = va_arg(tab->ap, int);
 	arg_to_print = ft_itoa(arg);
-	if (!(string = get_string_d(arg_to_print, tab)))
+	string = get_string_d(arg_to_print, tab, arg);
+	if (string == NULL)
 		exit (-1);
 	len_to_print = ft_strlen(string);
 	ft_putstr(string);
