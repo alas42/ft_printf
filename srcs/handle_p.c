@@ -16,63 +16,37 @@ static int	fill_result2(char *string, t_tab *tab, char *arg, long int pos)
 {
 	long int i;
 	long int j;
-	long int c;
 	long int len_arg;
 
+	j = 0;
 	len_arg = (long int)ft_strlen(arg);
 	i = pos;
-	j = (i > 0 && tab->argument->precision > len_arg) ? i - (tab->argument->precision - len_arg) : 0;
-	c = -1;
-	while (++c < tab->argument->precision - len_arg)
-	{
-		string[j + c] = '0';
-		i = (j == 0) ? i + 1 : i;
-	}
-	j = 0;
-	while (j < len_arg)
+	while (i < len_arg)
 		string[i++] = arg[j++];
-	if (tab->argument->flags[0])
-		if (tab->argument->field_width > len_arg)
-			while (i < tab->argument->field_width)
-				string[i++] = ' ';
 	return (1);
 }
 
 static int	fill_result(char *string, t_tab *tab, char *arg, long int len_arg)
 {
 	long int i;
-	long int c;
 	long int j;
 
 	j = 0;
-	c = 0;
 	i = 0;
-	if (!tab->argument->flags[0])
+	if (tab->argument->flags[0])
 	{
-		c = (tab->argument->precision < len_arg - 2) ? tab->argument->field_width - (len_arg - 2)
-			: tab->argument->field_width - (tab->argument->precision + 2);
-		if (c > 0)
-			printf("c == %ld\n", c);
-			while (i < c)
+		string[i++] = '0';
+		string[i++] = 'x';
+	}
+	else
+	{
+		if (tab->argument->field_width >= len_arg + 2)
+			while (i < (tab->argument->field_width - (len_arg + 2))
 			{
-				printf("i == %ld < c == %ld\n", i, c);
-				if (tab->argument->flags[1] && tab->argument->precision == -1)
-				{
-					printf("handle_p flags[1] and prec -1\n");
-					if (i == 0)
-					{
-						printf("handle_p flags[1] and prec -1 and i ==0\n");
-						string[i++] = '0';
-						string[i] = 'x';
-						j += 2;
-					}
-					else
-						string[i] = '0';
-				}
-				else
-					string[i] = ' ';
-				i++;
+				string[i++] = ' ';
 			}
+			string[i++] = '0';
+			string[i++] = 'x';
 	}
 	if (fill_result2(string, tab, arg, i))
 		return (1);
@@ -85,12 +59,10 @@ char		*get_string_p(char *arg, t_tab *tab, long int len_arg)
 	char	*string;
 
 	string = NULL;
-	if (tab->argument->field_width >= tab->argument->precision + 2 && tab->argument->field_width > len_arg)
+	if (tab->argument->field_width >= len_arg + 2)
 		string = ft_strnew(tab->argument->field_width);
-	else if (tab->argument->field_width < tab->argument->precision + 2 && tab->argument->precision + 2 > len_arg)
-		string = ft_strnew(tab->argument->precision + 2);
 	else
-		string = ft_strnew(len_arg);
+		string = ft_strnew(len_arg + 2);
 	if (fill_result(string, tab, arg, len_arg))
 		return (string);
 	return (NULL);
