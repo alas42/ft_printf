@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static int	fill_result2(char *string, t_tab *tab, char *arg, long int pos)
+static int	fill_result2(char *string, char *arg, long int pos)
 {
 	long int i;
 	long int j;
@@ -48,7 +48,7 @@ static int	fill_result(char *string, t_tab *tab, char *arg, long int len_arg)
 			string[i++] = '0';
 			string[i++] = 'x';
 	}
-	if (fill_result2(string, tab, arg, i))
+	if (fill_result2(string, arg, i))
 		return (1);
 	else
 		return (-1);
