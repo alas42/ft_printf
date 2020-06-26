@@ -6,7 +6,7 @@
 /*   By: avogt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 16:16:46 by avogt             #+#    #+#             */
-/*   Updated: 2020/06/26 21:21:11 by avogt            ###   ########.fr       */
+/*   Updated: 2020/06/26 23:40:45 by avogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	fill_result(char *string, t_tab *tab, char *arg, long int len_arg)
 	else
 	{
 		if (tab->argument->field_width >= len_arg + 2)
-			while (i < (tab->argument->field_width - (len_arg + 2))
+			while (i < (tab->argument->field_width - (len_arg + 2)))
 			{
 				string[i++] = ' ';
 			}
