@@ -12,11 +12,12 @@
 
 #include "ft_printf.h"
 
-
-static int fill_string2(char *string, t_tab *tab, char *arg, long int pos)
-{
-	return (1);
-}
+/*
+ *static int fill_string2(char *string, t_tab *tab, char *arg, long int pos)
+ *{
+ *	return (1);
+ *}
+ */
 
 static int fill_string(char *string, t_tab *tab, char *arg, char signe)
 {
@@ -100,11 +101,10 @@ static char	*get_string_d(char *arg, t_tab *tab)
 	else
 		string = ft_strnew(len_arg);
 	return (string);
-	/*
-	 *if (fill_string(string, tab, arg, signe))
-	 *
-	 * else return (NULL);
-	 */
+	if (fill_string(string, tab, arg, signe))
+		return (string);
+	else
+		return (NULL);
 }
 
 t_tab		*handle_d(t_tab *tab)
