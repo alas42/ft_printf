@@ -74,7 +74,6 @@ static int fill_string(char *string, t_tab *tab, char *arg, char signe)
 		if (tab->argument->field_width > (long int) ft_strlen(arg))
 			while (i < tab->argument->field_width)
 				string[i++] = ' ';
-	
 	ft_strdel(&result);
 	return (1);
 }
@@ -85,9 +84,9 @@ static char	*get_string_d(char *arg, t_tab *tab)
 	long int	len_arg;
 	char		signe;
 
+	signe = (arg < 0) ? '-' : '+';
 	len_arg = (long int) ft_strlen(arg);
 	len_arg = (signe == '-') ? len_arg -1 : len_arg;
-	signe = (arg < 0) ? '-' : '+';
 	string = NULL;
 	if (tab->argument->field_width >= tab->argument->precision
 		&& tab->argument->field_width > len_arg)
@@ -100,10 +99,12 @@ static char	*get_string_d(char *arg, t_tab *tab)
 		string = ft_strnew(len_arg + 1);
 	else
 		string = ft_strnew(len_arg);
-	if (fill_string(string, tab, arg, signe))
-		return (string);
-	else
-		return (NULL);
+	return (string);
+	/*
+	 *if (fill_string(string, tab, arg, signe))
+	 *
+	 * else return (NULL);
+	 */
 }
 
 t_tab		*handle_d(t_tab *tab)
