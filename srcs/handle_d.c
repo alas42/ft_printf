@@ -100,7 +100,6 @@ static char	*get_string_d(char *arg_to_print, t_tab *tab, int arg)
 		string = ft_strnew(len_arg + 1);
 	else
 		string = ft_strnew(len_arg);
-	return (string);
 	if (fill_string(string, tab, arg_to_print, signe))
 		return (string);
 	else
