@@ -25,16 +25,16 @@ static int	fill_result2(char *string, t_tab *tab, char *arg, long int pos)
 	c = -1;
 	while (++c < tab->argument->precision - len_arg)
 	{
-		s[j + c] = '0';
+		string[j + c] = '0';
 		i = (j == 0) ? i + 1 : i;
 	}
 	j = 0;
 	while (j < len_arg)
-		s[i++] = result[j++];
+		string[i++] = result[j++];
 	if (tab->argument->flags[0])
 		if (tab->argument->field_width > len_arg)
 			while (i < tab->argument->field_width)
-				s[i++] = ' ';
+				string[i++] = ' ';
 	return (1);
 }
 
@@ -99,7 +99,7 @@ t_tab	*handle_p(t_tab *tab)
 	size_t	len_to_print;
 
 	len_to_print = 0;
-	arg_to_print = ft_convert_base_l((unsigned long int)va_arg(ap, void *), 16);
+	arg_to_print = ft_convert_base_l((unsigned long int)va_arg(tab->ap, void *), 16);
 	printf("arg_to_print : --%s-- len_arg : --%ld-- field_width : --%ld-- precision : --%ld--\n", arg_to_print, (long int)ft_strlen(arg_to_print), tab->argument->field_width, tab->argument->precision);
 	s = get_string_p(arg_to_print, tab, (long int)ft_strlen(arg_to_print));
 	len_to_print = ft_strlen(s);
