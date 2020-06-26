@@ -21,7 +21,7 @@ static int	fill_result2(char *string, char *arg, long int pos)
 	j = 0;
 	len_arg = (long int)ft_strlen(arg);
 	i = pos;
-	while (i < len_arg)
+	while (j < len_arg)
 		string[i++] = arg[j++];
 	return (1);
 }
