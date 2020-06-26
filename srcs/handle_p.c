@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static int	fill_result2(char *string, char *arg, long int pos)
+static int	fill_string2(char *string, char *arg, long int pos)
 {
 	long int i;
 	long int j;
@@ -26,7 +26,7 @@ static int	fill_result2(char *string, char *arg, long int pos)
 	return (1);
 }
 
-static int	fill_result(char *string, t_tab *tab, char *arg, long int len_arg)
+static int	fill_string(char *string, t_tab *tab, char *arg, long int len_arg)
 {
 	long int i;
 	long int j;
@@ -48,7 +48,7 @@ static int	fill_result(char *string, t_tab *tab, char *arg, long int len_arg)
 			string[i++] = '0';
 			string[i++] = 'x';
 	}
-	if (fill_result2(string, arg, i))
+	if (fill_string2(string, arg, i))
 		return (1);
 	else
 		return (-1);
@@ -63,7 +63,7 @@ char		*get_string_p(char *arg, t_tab *tab, long int len_arg)
 		string = ft_strnew(tab->argument->field_width);
 	else
 		string = ft_strnew(len_arg + 2);
-	if (fill_result(string, tab, arg, len_arg))
+	if (fill_string(string, tab, arg, len_arg))
 		return (string);
 	return (NULL);
 }

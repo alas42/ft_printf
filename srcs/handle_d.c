@@ -12,42 +12,27 @@
 
 #include "ft_printf.h"
 
-t_tab	*handle_d(t_tab *tab)
-{
-	int 	num;
-	char	*tmp_num;
-	char	*s;
-	char	*result;
-	long int c;
-	long int i;
-	long int j;
-	long int length_result;
-	char	signe;
 
-	num = va_arg(tab->ap, int);
-	signe = (num < 0) ? '-' : '+';
-	tmp_num = ft_itoa(num);
-	length_result = ft_strlen(tmp_num);
+static int fill_string2(char *string, t_tab *tab, char *arg, long int pos)
+{
+	return (1);
+}
+
+static int fill_string(char *string, t_tab *tab, char *arg, char signe)
+{
+	long int	c;
+	long int	i;
+	long int	j;
+	char		*result;
+
 	i = 0;
 	j = 0;
 	c = 0;
-	result = (signe == '-') ? ft_strsub(tmp_num, 1, length_result - 1) : ft_strdup(tmp_num);
-	ft_strdel(&tmp_num);
-	length_result = (signe == '-') ? length_result -1 : length_result;
-	if (tab->argument->field_width >= tab->argument->precision
-		&& tab->argument->field_width > length_result)
-		s = ft_strnew(tab->argument->field_width);
-	else if (tab->argument->field_width < tab->argument->precision
-		&& tab->argument->precision > length_result)
-		s = (signe == '-') ? ft_strnew(tab->argument->precision + 1) : ft_strnew(tab->argument->precision);
-	else if (signe == '-')
-		s = ft_strnew(length_result + 1);
-	else
-		s = ft_strnew(length_result);
+	result = (signe == '-') ? ft_strsub(arg, 1, (long int) (ft_strlen(arg) - 1)) : ft_strdup(arg);
 	if (!tab->argument->flags[0])
 	{
-		if (tab->argument->precision < length_result)
-			c = (signe == '-') ? tab->argument->field_width - (length_result + 1) : tab->argument->field_width - length_result;
+		if (tab->argument->precision < (long int) ft_strlen(arg))
+			c = (signe == '-') ? tab->argument->field_width - ((long int) ft_strlen(arg) + 1) : tab->argument->field_width - (long int) ft_strlen(arg);
 		else
 			c = (signe == '-') ? tab->argument->field_width - tab->argument->precision : tab->argument->field_width - tab->argument->precision;
 		if (c > 0)
@@ -58,39 +43,84 @@ t_tab	*handle_d(t_tab *tab)
 				{
 					if (i == 0 && (signe == '-'))
 					{
-						s[i] = signe;
+						string[i] = signe;
 						j++;
 					}
 					else
-						s[i] = '0';
+						string[i] = '0';
 				}
 				else
-					s[i] = ' ';
+					string[i] = ' ';
 				i++;
 			}
 		}
 	}
 	if ((signe == '-') && j == 0)
 	{
-		s[i++] = signe;
+		string[i++] = signe;
 		j++;
 	}
 	j = (c > 0) ? j + c : j;
 	c = -1;
-	while (++c < tab->argument->precision - length_result)
+	while (++c < tab->argument->precision - (long int) ft_strlen(arg))
 	{
-		s[j + c] = '0';
+		string[j + c] = '0';
 		i++;
 	}
 	j = 0;
-	while (j < length_result)
-		s[i++] = result[j++];
+	while (j < (long int) ft_strlen(arg))
+		string[i++] = result[j++];
 	if (tab->argument->flags[0])
-		if (tab->argument->field_width > length_result)
+		if (tab->argument->field_width > (long int) ft_strlen(arg))
 			while (i < tab->argument->field_width)
-				s[i++] = ' ';
-	ft_putstr(s);
-	ft_strdel(&s);
+				string[i++] = ' ';
+	
 	ft_strdel(&result);
+	return (1);
+}
+
+static char	*get_string_d(char *arg, t_tab *tab)
+{
+	char		*string;
+	long int	len_arg;
+	char		signe;
+
+	len_arg = (long int) ft_strlen(arg);
+	len_arg = (signe == '-') ? len_arg -1 : len_arg;
+	signe = (arg < 0) ? '-' : '+';
+	string = NULL;
+	if (tab->argument->field_width >= tab->argument->precision
+		&& tab->argument->field_width > len_arg)
+		string = ft_strnew(tab->argument->field_width);
+	else if (tab->argument->field_width < tab->argument->precision
+		&& tab->argument->precision > len_arg)
+		string = (signe == '-') ? ft_strnew(tab->argument->precision + 1)
+			: ft_strnew(tab->argument->precision);
+	else if (signe == '-')
+		string = ft_strnew(len_arg + 1);
+	else
+		string = ft_strnew(len_arg);
+	if (fill_string(string, tab, arg, signe))
+		return (string);
+	else
+		return (NULL);
+}
+
+t_tab		*handle_d(t_tab *tab)
+{
+	int 		arg;
+	char		*arg_to_print;
+	char		*string;
+	size_t		len_to_print;
+
+	len_to_print = 0;
+	arg = va_arg(tab->ap, int);
+	arg_to_print = ft_itoa(arg);
+	if (!(string = get_string_d(arg_to_print, tab)))
+		exit (-1);
+	len_to_print = ft_strlen(string);
+	ft_putstr(string);
+	ft_strdel(&string);
+	ft_strdel(&arg_to_print);
 	return (tab);
 }
