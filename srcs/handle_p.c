@@ -52,13 +52,16 @@ static int	fill_result(char *string, t_tab *tab, char *arg, long int len_arg)
 		c = (tab->argument->precision < len_arg - 2) ? tab->argument->field_width - (len_arg - 2)
 			: tab->argument->field_width - (tab->argument->precision + 2);
 		if (c > 0)
+			printf("c == %ld\n", c);
 			while (i < c)
 			{
+				printf("i == %ld < c == %ld\n", i, c);
 				if (tab->argument->flags[1] && tab->argument->precision == -1)
 				{
-					ft_putstr("handle_p flags[1] and prec -1");
+					printf("handle_p flags[1] and prec -1\n");
 					if (i == 0)
 					{
+						printf("handle_p flags[1] and prec -1 and i ==0\n");
 						string[i++] = '0';
 						string[i] = 'x';
 						j += 2;
