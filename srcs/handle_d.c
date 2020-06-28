@@ -12,71 +12,54 @@
 
 #include "ft_printf.h"
 
-/*
- *static int fill_string2(char *string, t_tab *tab, char *arg, long int pos)
- *{
- *	return (1);
- *}
- */
+static int	fill_str_2(char *string, t_tab *tab, char *arg, long int len_arg)
+{
+	if (tab->argument->precision > len_arg)
+		while (c++ < tab->argument->precision - len_arg)
+			string[i++] = '0';
+	c = 0;
+	while (c < len_arg)
+		string[i++] = arg[c++];
+	c = 0;
+	if (tab->argument->precision > len_arg)
+		if (tab->argument->field_width > tab->argument->precision)
+			c = tab->argument->field_width - tab->argument->precision;
+	else
+		if (tab->argument->field_width > len_arg)
+			c = tab->argument->field_width - len_arg;
+	while (c-- > 0)
+		string[i++] = ' ';
+	return (1);
+}
 
-static int fill_string(char *string, t_tab *tab, char *arg, char signe)
+static int	fill_str_1(char *string, t_tab *tab, char *arg, long int len_arg)
 {
 	long int	c;
 	long int	i;
-	long int	j;
-	char		*result;
 
 	i = 0;
-	j = 0;
 	c = 0;
-	result = (signe == '-') ? ft_strsub(arg, 1, (long int) (ft_strlen(arg) - 1)) : ft_strdup(arg);
 	if (!tab->argument->flags[0])
 	{
-		if (tab->argument->precision < (long int) ft_strlen(arg))
-			c = (signe == '-') ? tab->argument->field_width - ((long int) ft_strlen(arg) + 1) : tab->argument->field_width - (long int) ft_strlen(arg);
+		if (tab->argument->precision > len_arg)
+			if (tab->argument->field_width > tab->argument->precision)
+				c = tab->argument->field_width - tab->argument->precision;
 		else
-			c = (signe == '-') ? tab->argument->field_width - tab->argument->precision : tab->argument->field_width - tab->argument->precision;
-		if (c > 0)
-		{
-			while (i < c)
-			{
-				if (tab->argument->flags[1] && tab->argument->precision == -1)
-				{
-					if (i == 0 && (signe == '-'))
-					{
-						string[i] = signe;
-						j++;
-					}
-					else
-						string[i] = '0';
-				}
-				else
-					string[i] = ' ';
-				i++;
-			}
-		}
+			if (tab->argument->field_width > len_arg)
+				c = tab->argument->field_width - len_arg;
+		while (c-- > 0)
+			string[i++] = (tab->argument->flags[1]) ? '0' : ' ';
+		c = 0;
+		if (tab->argument->precision > len_arg)
+			while (c++ < tab->argument->precision - len_arg)
+				string[i++] = '0';
+		c = 0;
+		while (c < len_arg)
+			string[i++] = arg[c++];
+		return (1);
 	}
-	if ((signe == '-') && j == 0)
-	{
-		string[i++] = signe;
-		j++;
-	}
-	j = (c > 0) ? j + c : j;
-	c = -1;
-	while (++c < tab->argument->precision - (long int) ft_strlen(arg))
-	{
-		string[j + c] = '0';
-		i++;
-	}
-	j = 0;
-	while (j < (long int) ft_strlen(arg))
-		string[i++] = result[j++];
-	if (tab->argument->flags[0])
-		if (tab->argument->field_width > (long int) ft_strlen(arg))
-			while (i < tab->argument->field_width)
-				string[i++] = ' ';
-	ft_strdel(&result);
-	return (1);
+	else
+		return (fill_str_2(string, tab, arg, len_arg));
 }
 
 static char	*get_string_d(char *arg_to_print, t_tab *tab, int arg)
@@ -100,7 +83,7 @@ static char	*get_string_d(char *arg_to_print, t_tab *tab, int arg)
 		string = ft_strnew(len_arg + 1);
 	else
 		string = ft_strnew(len_arg);
-	if (fill_string(string, tab, arg_to_print, signe))
+	if (fill_str_1(string, tab, arg_to_print, (long int) ft_strlen(arg_to_print)))
 		return (string);
 	else
 		return (NULL);

@@ -87,8 +87,9 @@ t_tab	*handle_x(t_tab *tab)
 
 	len_to_print = 0;
 	arg_to_print = ft_convert_base(va_arg(tab->ap, unsigned int), 16);
-	printf("arg_to_print : --%s-- len_arg : --%ld-- field_width : --%ld-- precision : --%ld--\n", arg_to_print, (long int)ft_strlen(arg_to_print), tab->argument->field_width, tab->argument->precision);
 	s = get_string_x(arg_to_print, tab, (long int)ft_strlen(arg_to_print));
+	if(s == NULL)
+		exit(-1);
 	len_to_print = ft_strlen(s);
 	if (tab->argument->specifier == 'X')
 		ft_strup(s);
@@ -96,9 +97,5 @@ t_tab	*handle_x(t_tab *tab)
 		ft_strlow(s);
 	ft_putstr(s);
 	free(s);
-	/*
-	 * is no string but buffer
-	 * free(arg_to_print);
-	 */
 	return (tab);
 }

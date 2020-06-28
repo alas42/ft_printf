@@ -42,11 +42,9 @@ static int	fill_string(char *string, t_tab *tab, char *arg, long int len_arg)
 	{
 		if (tab->argument->field_width >= len_arg + 2)
 			while (i < (tab->argument->field_width - (len_arg + 2)))
-			{
 				string[i++] = ' ';
-			}
-			string[i++] = '0';
-			string[i++] = 'x';
+		string[i++] = '0';
+		string[i++] = 'x';
 	}
 	if (fill_string2(string, arg, i))
 		return (1);
@@ -76,8 +74,9 @@ t_tab	*handle_p(t_tab *tab)
 
 	len_to_print = 0;
 	arg_to_print = ft_convert_base_l((unsigned long int)va_arg(tab->ap, void *), 16);
-   	printf("arg_to_print : --%s-- len_arg : --%ld-- field_width : --%ld-- precision : --%ld--\n", arg_to_print, (long int)ft_strlen(arg_to_print), tab->argument->field_width, tab->argument->precision);
 	s = get_string_p(arg_to_print, tab, (long int)ft_strlen(arg_to_print));
+	if(s == NULL)
+		exit(-1);
 	ft_strlow(s);
 	len_to_print = ft_strlen(s);
 	ft_putstr(s);
