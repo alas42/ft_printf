@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static long int	add_min(char *string, t_tab *tab, char *arg, long int len_arg)
+static long int	is_min(char *string, t_tab *tab, char *arg, long int len_arg)
 {
 	long int c;
 	long int i;
@@ -24,7 +24,7 @@ static long int	add_min(char *string, t_tab *tab, char *arg, long int len_arg)
 		if (tab->argument->flags[0])
 		{
 			string[0] = '-';
-			return (len_arg - 1)
+			return (len_arg - 1);
 		}
 		else
 		{
@@ -41,7 +41,7 @@ static int		f_str_2(char *string, t_tab *tab, char *arg, long int len_arg)
 
 	c = 0;
 	i = (arg[0] == '-') ? 1 : 0;
-	len_arg = check_minus(string, tab, arg, len_arg);
+	len_arg = is_min(string, tab, arg, len_arg);
 	if (tab->argument->precision > len_arg)
 		while (c++ < tab->argument->precision - len_arg)
 			string[i++] = '0';
