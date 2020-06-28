@@ -6,7 +6,7 @@
 /*   By: avogt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 16:36:52 by avogt             #+#    #+#             */
-/*   Updated: 2020/06/26 21:13:26 by avogt            ###   ########.fr       */
+/*   Updated: 2020/06/28 16:08:46 by avogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,16 +80,16 @@ int	main(void)
 	ft_printf("%.5s 45\n", s);
 	printf("%.5s 45\n", s);
 	
-	ft_printf("%d\n", test);
-	printf("%d\n", test);
-	ft_printf("%5d\n", test);
-	printf("%5d\n", test);
-	ft_printf("%-5d\n", test);
-	printf("%-5d\n", test);
-	ft_printf("%-d 0\n", test);
-	printf("%-d 0\n", test);
-	ft_printf("%.d 45\n", test);
-	printf("%.d 45\n", test);
+	ft_printf("%d\n", -333);
+	printf("%d\n", -333);
+	ft_printf("%5d\n", -333);
+	printf("%5d\n", -333);
+	ft_printf("%10.5d\n", -333);
+	printf("%10.5d\n", -333);
+	ft_printf("%-40d 0\n", -333);
+	printf("%-40d 0\n", -333);
+	ft_printf("%.10d 45\n", -333);
+	printf("%.10d 45\n", -333);
 
 	ft_printf("%p\n", &test);
 	printf("%p\n", &test);
