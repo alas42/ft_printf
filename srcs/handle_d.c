@@ -27,8 +27,10 @@ static int	fill_str_2(char *string, t_tab *tab, char *arg, long int len_arg)
 		string[i++] = arg[c++];
 	c = 0;
 	if (tab->argument->precision > len_arg)
+	{
 		if (tab->argument->field_width > tab->argument->precision)
 			c = tab->argument->field_width - tab->argument->precision;
+	}
 	else
 		if (tab->argument->field_width > len_arg)
 			c = tab->argument->field_width - len_arg;
@@ -47,8 +49,10 @@ static int	fill_str_1(char *string, t_tab *tab, char *arg, long int len_arg)
 	if (!tab->argument->flags[0])
 	{
 		if (tab->argument->precision > len_arg)
+		{
 			if (tab->argument->field_width > tab->argument->precision)
 				c = tab->argument->field_width - tab->argument->precision;
+		}
 		else
 			if (tab->argument->field_width > len_arg)
 				c = tab->argument->field_width - len_arg;
