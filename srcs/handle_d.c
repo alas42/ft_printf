@@ -53,7 +53,7 @@ static int		f_str_2(char *string, t_tab *tab, char *arg, long int len_arg)
 	if (tab->argument->precision > len_arg)
 	{
 		if (tab->argument->field_width > tab->argument->precision)
-			c = tab->argument->field_width - tab->argument->precision;
+			c = (arg[0] == '-') ? tab->argument->field_width - (tab->argument->precision + 1) : tab->argument->field_width - tab->argument->precision;
 	}
 	else
 		if (tab->argument->field_width > len_arg)
