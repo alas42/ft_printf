@@ -12,85 +12,136 @@
 
 #include "ft_printf.h"
 
-t_tab	*handle_i(t_tab *tab)
+static long int	is_min(char *string, t_tab *tab, char *arg, long int pos)
 {
-	int 	num;
-	char	*tmp_num;
-	char	*s;
-	char	*result;
 	long int c;
 	long int i;
-	long int j;
-	long int length_result;
-	char	signe;
+	long int len_arg;
 
-	num = va_arg(tab->ap, int);
-	signe = (num < 0) ? '-' : '+';
-	tmp_num = ft_itoa(num);
-	length_result = ft_strlen(tmp_num);
+	len_arg = ft_strlen(arg);
+	c= 0;
 	i = 0;
-	j = 0;
-	c = 0;
-	result = (signe == '-') ? ft_strsub(tmp_num, 1, length_result - 1) : ft_strdup(tmp_num);
-	ft_strdel(&tmp_num);
-	length_result = (signe == '-') ? length_result -1 : length_result;
-	if (tab->argument->field_width >= tab->argument->precision
-		&& tab->argument->field_width > length_result)
-		s = ft_strnew(tab->argument->field_width);
-	else if (tab->argument->field_width < tab->argument->precision
-		&& tab->argument->precision > length_result)
-		s = (signe == '-') ? ft_strnew(tab->argument->precision + 1) : ft_strnew(tab->argument->precision);
-	else if (signe == '-')
-		s = ft_strnew(length_result + 1);
-	else
-		s = ft_strnew(length_result);
-	if (!tab->argument->flags[0])
+	if (arg[0] == '-')
 	{
-		if (tab->argument->precision < length_result)
-			c = (signe == '-') ? tab->argument->field_width - (length_result + 1) : tab->argument->field_width - length_result;
-		else
-			c = (signe == '-') ? tab->argument->field_width - tab->argument->precision : tab->argument->field_width - tab->argument->precision;
-		if (c > 0)
+		if (tab->argument->flags[0])
 		{
-			while (i < c)
-			{
-				if (tab->argument->flags[1] && tab->argument->precision == -1)
-				{
-					if (i == 0 && (signe == '-'))
-					{
-						s[i] = signe;
-						j++;
-					}
-					else
-						s[i] = '0';
-				}
-				else
-					s[i] = ' ';
-				i++;
-			}
+			string[0] = '-';
+			return (len_arg - 1);
+		}
+		else
+		{
+			string[pos] = '-';
+			return (len_arg - 1);
 		}
 	}
-	if ((signe == '-') && j == 0)
+	return (len_arg);
+}
+
+static int		f_str_2(char *string, t_tab *tab, char *arg, long int len_arg)
+{
+	long int c;
+	long int i;
+
+	c = 0;
+	i = (arg[0] == '-') ? 1 : 0;
+	len_arg = is_min(string, tab, arg, i);
+	if (tab->argument->precision > len_arg)
+		while (c++ < tab->argument->precision - len_arg)
+			string[i++] = '0';
+	c = (arg[0] == '-') ? 1 : 0;
+	while (arg[c] != '\0')
+		string[i++] = arg[c++];
+	c = 0;
+	len_arg = (arg[0] == '-') ? len_arg + 1 : len_arg;
+	if (tab->argument->precision > len_arg)
 	{
-		s[i++] = signe;
-		j++;
+		if (tab->argument->field_width > tab->argument->precision)
+			c = (arg[0] == '-') ? tab->argument->field_width - (tab->argument->precision + 1) : tab->argument->field_width - tab->argument->precision;
 	}
-	j = (c > 0) ? j + c : j;
-	c = -1;
-	while (++c < tab->argument->precision - length_result)
+	else
+		if (tab->argument->field_width > len_arg)
+			c = tab->argument->field_width - len_arg;
+	while (c-- > 0)
+		string[i++] = ' ';
+	return (1);
+}
+
+static int	f_str_1(char *string, t_tab *tab, char *arg, long int len_arg)
+{
+	long int	c;
+	long int	i;
+
+	i = 0;
+	c = 0;
+	if (!tab->argument->flags[0])
 	{
-		s[j + c] = '0';
-		i++;
+		if (tab->argument->precision > len_arg)
+		{
+			if (tab->argument->field_width > tab->argument->precision)
+				c = (arg[0] == '-') ? tab->argument->field_width - (tab->argument->precision + 1) : tab->argument->field_width - tab->argument->precision;
+		}
+		else
+			if (tab->argument->field_width > len_arg)
+				c = tab->argument->field_width - len_arg;
+		while (c-- > 0)
+			string[i++] = (tab->argument->flags[1]) ? '0' : ' ';
+		c = 0;
+		len_arg = is_min(string, tab, arg, i);
+		i = (arg[0] == '-') ? i + 1 : i;
+		if (tab->argument->precision > len_arg)
+			while (c++ < tab->argument->precision - len_arg)
+				string[i++] = '0';
+		c = (arg[0] == '-') ? 1 : 0;
+		while (arg[c] != '\0')
+			string[i++] = arg[c++];
+		return (1);
 	}
-	j = 0;
-	while (j < length_result)
-		s[i++] = result[j++];
-	if (tab->argument->flags[0])
-		if (tab->argument->field_width > length_result)
-			while (i < tab->argument->field_width)
-				s[i++] = ' ';
-	ft_putstr(s);
-	ft_strdel(&s);
-	ft_strdel(&result);
+	else
+		return (f_str_2(string, tab, arg, len_arg));
+}
+
+static char	*get_string_i(char *arg_to_print, t_tab *tab, int arg)
+{
+	char		*string;
+	long int	len_arg;
+	char		signe;
+
+	signe = (arg < 0) ? '-' : '+';
+	len_arg = (long int) ft_strlen(arg_to_print);
+	len_arg = (signe == '-') ? len_arg -1 : len_arg;
+	string = NULL;
+	if (tab->argument->field_width >= tab->argument->precision
+		&& tab->argument->field_width > len_arg)
+		string = ft_strnew(tab->argument->field_width);
+	else if (tab->argument->field_width < tab->argument->precision
+		&& tab->argument->precision > len_arg)
+		string = (signe == '-') ? ft_strnew(tab->argument->precision + 1)
+			: ft_strnew(tab->argument->precision);
+	else if (signe == '-')
+		string = ft_strnew(len_arg + 1);
+	else
+		string = ft_strnew(len_arg);
+	if (f_str_1(string, tab, arg_to_print, (long int) ft_strlen(arg_to_print)))
+		return (string);
+	return (NULL);
+}
+
+t_tab		*handle_i(t_tab *tab)
+{
+	int 		arg;
+	char		*arg_to_print;
+	char		*string;
+	size_t		len_to_print;
+
+	len_to_print = 0;
+	arg = va_arg(tab->ap, int);
+	arg_to_print = ft_itoa(arg);
+	string = get_string_d(arg_to_print, tab, arg);
+	if (string == NULL)
+		exit (-1);
+	len_to_print = ft_strlen(string);
+	ft_putstr(string);
+	ft_strdel(&string);
+	ft_strdel(&arg_to_print);
 	return (tab);
 }
