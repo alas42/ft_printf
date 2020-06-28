@@ -12,13 +12,36 @@
 
 #include "ft_printf.h"
 
-static int	fill_str_2(char *string, t_tab *tab, char *arg, long int len_arg)
+static long int	add_min(char *string, t_tab *tab, char *arg, long int len_arg)
+{
+	long int c;
+	long int i;
+
+	c= 0;
+	i = 0;
+	if (arg[0] == '-')
+	{
+		if (tab->argument->flags[0])
+		{
+			string[0] = '-';
+			return (len_arg - 1)
+		}
+		else
+		{
+
+		}
+	}
+	return (len_arg);
+}
+
+static int		f_str_2(char *string, t_tab *tab, char *arg, long int len_arg)
 {
 	long int c;
 	long int i;
 
 	c = 0;
-	i = 0;
+	i = (arg[0] == '-') ? 1 : 0;
+	len_arg = check_minus(string, tab, arg, len_arg);
 	if (tab->argument->precision > len_arg)
 		while (c++ < tab->argument->precision - len_arg)
 			string[i++] = '0';
@@ -39,7 +62,7 @@ static int	fill_str_2(char *string, t_tab *tab, char *arg, long int len_arg)
 	return (1);
 }
 
-static int	fill_str_1(char *string, t_tab *tab, char *arg, long int len_arg)
+static int	f_str_1(char *string, t_tab *tab, char *arg, long int len_arg)
 {
 	long int	c;
 	long int	i;
@@ -68,7 +91,7 @@ static int	fill_str_1(char *string, t_tab *tab, char *arg, long int len_arg)
 		return (1);
 	}
 	else
-		return (fill_str_2(string, tab, arg, len_arg));
+		return (f_str_2(string, tab, arg, len_arg));
 }
 
 static char	*get_string_d(char *arg_to_print, t_tab *tab, int arg)
@@ -92,10 +115,9 @@ static char	*get_string_d(char *arg_to_print, t_tab *tab, int arg)
 		string = ft_strnew(len_arg + 1);
 	else
 		string = ft_strnew(len_arg);
-	if (fill_str_1(string, tab, arg_to_print, (long int) ft_strlen(arg_to_print)))
+	if (f_str_1(string, tab, arg_to_print, (long int) ft_strlen(arg_to_print)))
 		return (string);
-	else
-		return (NULL);
+	return (NULL);
 }
 
 t_tab		*handle_d(t_tab *tab)
