@@ -49,6 +49,7 @@ static int		f_str_2(char *string, t_tab *tab, char *arg, long int len_arg)
 	while (arg[c] != '\0')
 		string[i++] = arg[c++];
 	c = 0;
+	len_arg = (arg[0] == '-') ? len_arg + 1 : len_arg;
 	if (tab->argument->precision > len_arg)
 	{
 		if (tab->argument->field_width > tab->argument->precision)
