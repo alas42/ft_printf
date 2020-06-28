@@ -6,7 +6,7 @@
 /*   By: avogt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 16:18:11 by avogt             #+#    #+#             */
-/*   Updated: 2020/06/26 21:08:47 by avogt            ###   ########.fr       */
+/*   Updated: 2020/06/28 17:20:28 by avogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ t_tab		*handle_i(t_tab *tab)
 	len_to_print = 0;
 	arg = va_arg(tab->ap, int);
 	arg_to_print = ft_itoa(arg);
-	string = get_string_d(arg_to_print, tab, arg);
+	string = get_string_i(arg_to_print, tab, arg);
 	if (string == NULL)
 		exit (-1);
 	len_to_print = ft_strlen(string);
