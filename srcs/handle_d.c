@@ -16,7 +16,9 @@ static long int	is_min(char *string, t_tab *tab, char *arg, long int pos)
 {
 	long int c;
 	long int i;
+	long int len_arg;
 
+	len_arg = ft_strlen(arg);
 	c= 0;
 	i = 0;
 	if (arg[0] == '-')
