@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static long int	is_min(char *string, t_tab *tab, char *arg, long int len_arg)
+static long int	is_min(char *string, t_tab *tab, char *arg, long int pos)
 {
 	long int c;
 	long int i;
@@ -28,7 +28,8 @@ static long int	is_min(char *string, t_tab *tab, char *arg, long int len_arg)
 		}
 		else
 		{
-
+			string[pos] = '-';
+			return (len_arg - 1);
 		}
 	}
 	return (len_arg);
@@ -41,7 +42,7 @@ static int		f_str_2(char *string, t_tab *tab, char *arg, long int len_arg)
 
 	c = 0;
 	i = (arg[0] == '-') ? 1 : 0;
-	len_arg = is_min(string, tab, arg, len_arg);
+	len_arg = is_min(string, tab, arg, i);
 	if (tab->argument->precision > len_arg)
 		while (c++ < tab->argument->precision - len_arg)
 			string[i++] = '0';
@@ -75,7 +76,7 @@ static int	f_str_1(char *string, t_tab *tab, char *arg, long int len_arg)
 		if (tab->argument->precision > len_arg)
 		{
 			if (tab->argument->field_width > tab->argument->precision)
-				c = tab->argument->field_width - tab->argument->precision;
+				c = (arg[0] == '-') ? tab->argument->field_width - (tab->argument->precision + 1) : tab->argument->field_width - tab->argument->precision;
 		}
 		else
 			if (tab->argument->field_width > len_arg)
@@ -83,11 +84,13 @@ static int	f_str_1(char *string, t_tab *tab, char *arg, long int len_arg)
 		while (c-- > 0)
 			string[i++] = (tab->argument->flags[1]) ? '0' : ' ';
 		c = 0;
+		len_arg = is_min(string, tab, arg, i);
+		i = (arg[0] == '-') ? i + 1 : i;
 		if (tab->argument->precision > len_arg)
 			while (c++ < tab->argument->precision - len_arg)
 				string[i++] = '0';
 		c = 0;
-		while (c < len_arg)
+		while (arg[c] != '\0')
 			string[i++] = arg[c++];
 		return (1);
 	}
