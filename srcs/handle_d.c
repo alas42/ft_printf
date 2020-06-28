@@ -46,7 +46,7 @@ static int		f_str_2(char *string, t_tab *tab, char *arg, long int len_arg)
 		while (c++ < tab->argument->precision - len_arg)
 			string[i++] = '0';
 	c = (arg[0] == '-') ? 1 : 0;
-	while (c < len_arg)
+	while (arg[c] != '\0')
 		string[i++] = arg[c++];
 	c = 0;
 	if (tab->argument->precision > len_arg)
