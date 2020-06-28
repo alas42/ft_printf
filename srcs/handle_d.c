@@ -14,6 +14,11 @@
 
 static int	fill_str_2(char *string, t_tab *tab, char *arg, long int len_arg)
 {
+	long int c;
+	long int i;
+
+	c = 0;
+	i = 0;
 	if (tab->argument->precision > len_arg)
 		while (c++ < tab->argument->precision - len_arg)
 			string[i++] = '0';
