@@ -37,8 +37,8 @@
 typedef struct  s_arg
 {
     char		flags[6];
-    long int	field_width;
-    long int	precision;
+    long int	width;
+    long int	prec;
 	char		specifier;
 	short int	redirector;
 }               t_arg;
@@ -51,7 +51,7 @@ typedef struct	s_tab
 	va_list			 ap;
 	int		    	len;
 	size_t	    	i;
-    t_arg			*argument;    
+    t_arg			*arg;    
 }               t_tab;
 
 int		ft_printf(const char *format, ...);

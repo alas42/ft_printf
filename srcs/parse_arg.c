@@ -24,12 +24,12 @@ t_tab	*check_flags(t_tab *tab)
 		{
 			while (tab->f_diff[tab->i] == '-')
 			{
-				tab->argument->flags[0] = '-';
+				tab->arg->flags[0] = '-';
 				tab->i++;
 			}
 			while (tab->f_diff[tab->i] == '0')
 			{
-				tab->argument->flags[1] = '0';
+				tab->arg->flags[1] = '0';
 				tab->i++;
 			}
 			i = 0;
@@ -43,15 +43,15 @@ t_tab	*check_field_width(t_tab *tab)
 {
 	if (tab->f_diff[tab->i] == '*')
 	{
-		tab->argument->field_width = (long int)va_arg(tab->ap, int);
+		tab->arg->width = (long int)va_arg(tab->ap, int);
 		tab->i++;
 	}
 	else if (tab->f_diff[tab->i] >= '0' && tab->f_diff[tab->i] <= '9')
 	{
 		while (tab->f_diff[tab->i] >= '0' && tab->f_diff[tab->i] <= '9')
 		{
-			tab->argument->field_width *= 10;
-			tab->argument->field_width += (tab->f_diff[tab->i] - 48);
+			tab->arg->width *= 10;
+			tab->arg->width += (tab->f_diff[tab->i] - 48);
 			tab->i++;
 		}
 	}
@@ -63,25 +63,25 @@ t_tab	*check_precision(t_tab *tab)
 	if (tab->f_diff[tab->i] == '.')
 	{
 		tab->i++;
-		tab->argument->precision = 0;
+		tab->arg->prec = 0;
 		if (tab->f_diff[tab->i] == '*')
 		{
-			tab->argument->precision = (long int)va_arg(tab->ap, int);
-			tab->argument->precision = (tab->argument->precision < -1) ? -1
-				: tab->argument->precision;
+			tab->arg->prec = (long int)va_arg(tab->ap, int);
+			tab->arg->prec = (tab->arg->prec < -1) ? -1
+				: tab->arg->prec;
 			tab->i++;
 		}
 		else if (tab->f_diff[tab->i] >= '0' && tab->f_diff[tab->i] <= '9')
 		{
 			while (tab->f_diff[tab->i] >= '0' && tab->f_diff[tab->i] <= '9')
 			{
-				tab->argument->precision *= 10;
-				tab->argument->precision += (tab->f_diff[tab->i] - 48);
+				tab->arg->prec *= 10;
+				tab->arg->prec += (tab->f_diff[tab->i] - 48);
 				tab->i++;
 			}
 		}
 		else
-			tab->argument->precision = 0;
+			tab->arg->prec = 0;
 	}
 	return (tab);
 }
@@ -96,8 +96,8 @@ t_tab	*check_specifier(t_tab *tab)
 	{
 		if (specifiers[i] == tab->f_diff[tab->i])
 		{
-			tab->argument->specifier = specifiers[i];
-			tab->argument->redirector = i;
+			tab->arg->specifier = specifiers[i];
+			tab->arg->redirector = i;
 		}
 		i++;
 	}

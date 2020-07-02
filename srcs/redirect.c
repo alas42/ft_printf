@@ -25,6 +25,6 @@ t_tab	*redirect(t_tab *tab)
 	redirection[6] = handle_s;
 	redirection[7] = handle_p;
 	redirection[8] = NULL;
-	redirection[tab->argument->redirector](tab);
+	redirection[tab->arg->redirector](tab);
 	return (tab);
 }

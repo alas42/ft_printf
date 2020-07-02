@@ -23,7 +23,7 @@ static long int	is_min(char *string, t_tab *tab, char *arg, long int pos)
 	i = 0;
 	if (arg[0] == '-')
 	{
-		if (tab->argument->flags[0])
+		if (tab->arg->flags[0])
 		{
 			string[0] = '-';
 			return (len_arg - 1);
@@ -45,22 +45,22 @@ static int		f_str_2(char *string, t_tab *tab, char *arg, long int len_arg)
 	c = 0;
 	i = (arg[0] == '-') ? 1 : 0;
 	len_arg = is_min(string, tab, arg, i);
-	if (tab->argument->precision > len_arg)
-		while (c++ < tab->argument->precision - len_arg)
+	if (tab->arg->prec > len_arg)
+		while (c++ < tab->arg->prec - len_arg)
 			string[i++] = '0';
 	c = (arg[0] == '-') ? 1 : 0;
 	while (arg[c] != '\0')
 		string[i++] = arg[c++];
 	c = 0;
 	len_arg = (arg[0] == '-') ? len_arg + 1 : len_arg;
-	if (tab->argument->precision > len_arg)
+	if (tab->arg->prec > len_arg)
 	{
-		if (tab->argument->field_width > tab->argument->precision)
-			c = (arg[0] == '-') ? tab->argument->field_width - (tab->argument->precision + 1) : tab->argument->field_width - tab->argument->precision;
+		if (tab->arg->width > tab->arg->prec)
+			c = (arg[0] == '-') ? tab->arg->width - (tab->arg->prec + 1) : tab->arg->width - tab->arg->prec;
 	}
 	else
-		if (tab->argument->field_width > len_arg)
-			c = tab->argument->field_width - len_arg;
+		if (tab->arg->width > len_arg)
+			c = tab->arg->width - len_arg;
 	while (c-- > 0)
 		string[i++] = ' ';
 	return (1);
@@ -73,23 +73,23 @@ static int		f_str_1(char *string, t_tab *tab, char *arg, long int len_arg)
 
 	i = 0;
 	c = 0;
-	if (!tab->argument->flags[0])
+	if (!tab->arg->flags[0])
 	{
-		if (tab->argument->precision > len_arg)
+		if (tab->arg->prec > len_arg)
 		{
-			if (tab->argument->field_width > tab->argument->precision)
-				c = (arg[0] == '-') ? tab->argument->field_width - (tab->argument->precision + 1) : tab->argument->field_width - tab->argument->precision;
+			if (tab->arg->width > tab->arg->prec)
+				c = (arg[0] == '-') ? tab->arg->width - (tab->arg->prec + 1) : tab->arg->width - tab->arg->prec;
 		}
 		else
-			if (tab->argument->field_width > len_arg)
-				c = tab->argument->field_width - len_arg;
+			if (tab->arg->width > len_arg)
+				c = tab->arg->width - len_arg;
 		while (c-- > 0)
-			string[i++] = (tab->argument->flags[1]) ? '0' : ' ';
+			string[i++] = (tab->arg->flags[1]) ? '0' : ' ';
 		c = 0;
 		len_arg = is_min(string, tab, arg, i);
 		i = (arg[0] == '-') ? i + 1 : i;
-		if (tab->argument->precision > len_arg)
-			while (c++ < tab->argument->precision - len_arg)
+		if (tab->arg->prec > len_arg)
+			while (c++ < tab->arg->prec - len_arg)
 				string[i++] = '0';
 		c = (arg[0] == '-') ? 1 : 0;
 		while (arg[c] != '\0')
@@ -110,13 +110,13 @@ static char		*get_string_d(char *arg_to_print, t_tab *tab, int arg)
 	len_arg = (long int)ft_strlen(arg_to_print);
 	len_arg = (signe == '-') ? len_arg - 1 : len_arg;
 	string = NULL;
-	if (tab->argument->field_width >= tab->argument->precision
-		&& tab->argument->field_width > len_arg)
-		string = ft_strnew(tab->argument->field_width);
-	else if (tab->argument->field_width < tab->argument->precision
-		&& tab->argument->precision > len_arg)
-		string = (signe == '-') ? ft_strnew(tab->argument->precision + 1)
-			: ft_strnew(tab->argument->precision);
+	if (tab->arg->width >= tab->arg->prec
+		&& tab->arg->width > len_arg)
+		string = ft_strnew(tab->arg->width);
+	else if (tab->arg->width < tab->arg->prec
+		&& tab->arg->prec > len_arg)
+		string = (signe == '-') ? ft_strnew(tab->arg->prec + 1)
+			: ft_strnew(tab->arg->prec);
 	else if (signe == '-')
 		string = ft_strnew(len_arg + 1);
 	else

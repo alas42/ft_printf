@@ -17,14 +17,14 @@ t_tab	*set_arg(t_tab *tab)
 	int i;
 
 	i = -1;
-	if (!(tab->argument = (t_arg*)malloc(sizeof(t_arg))))
+	if (!(tab->arg = (t_arg*)malloc(sizeof(t_arg))))
 		return (NULL);
 	while (++i < 6)
-		tab->argument->flags[i] = '\0';
-	tab->argument->precision = -1;
-	tab->argument->field_width = 0;
-	tab->argument->specifier = '\0';
-	tab->argument->redirector = -1;
+		tab->arg->flags[i] = '\0';
+	tab->arg->prec = -1;
+	tab->arg->width = 0;
+	tab->arg->specifier = '\0';
+	tab->arg->redirector = -1;
 	return (tab);
 }
 
