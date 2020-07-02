@@ -12,6 +12,31 @@
 
 #include "ft_printf.h"
 
+long int get_length_s(long int length_copy_arg)
+{
+	long int prec;
+	long int field_width;
+	long int length_s;
+
+	length_s = 0;
+	prec = tab->argument->precision;
+	field_width = tab->argument->field_width;
+	if (prec < 0 ||
+		prec >= length_copy_arg)
+	{
+		length_s = (field_width >= length_copy_arg)
+			? field_width : length_copy_arg;
+	}
+	else
+	{
+		length_s = (field_width >= length_copy_arg)
+			? field_width -	(length_copy_arg - prec) : prec;
+	}
+	prec = (prec < 0 || prec >= length_copy_arg) ? length_copy_arg : prec;
+	tab->argument->precision = prec;
+	return (length_s);
+}
+
 t_tab	*handle_s(t_tab *tab)
 {
 	char		*s;
@@ -23,16 +48,7 @@ t_tab	*handle_s(t_tab *tab)
 	i = -1;
 	copy_arg = va_arg(tab->ap, char *);
 	length_copy_arg = (long int)ft_strlen(copy_arg);
-	if (tab->argument->precision < 0 ||
-		tab->argument->precision >= length_copy_arg)
-		length_s = (tab->argument->field_width >= length_copy_arg)
-			? tab->argument->field_width : length_copy_arg;
-	else
-		length_s = (tab->argument->field_width >= length_copy_arg)
-			? tab->argument->field_width -
-			(length_copy_arg - tab->argument->precision) : tab->argument->precision;
-	tab->argument->precision = (tab->argument->precision < 0 || tab->argument->precision >= length_copy_arg)
-		? length_copy_arg : tab->argument->precision;
+	length_s = get_length_s(length_copy_arg);
 	copy_arg = (tab->argument->precision < length_copy_arg) ? ft_strsub(copy_arg, 0, tab->argument->precision) : copy_arg;
 	s = ft_strnew(length_s);
 	if (!tab->argument->flags[0] && tab->argument->field_width > length_s)
