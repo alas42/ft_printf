@@ -6,7 +6,7 @@
 /*   By: avogt <avogt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 16:03:26 by avogt             #+#    #+#             */
-/*   Updated: 2020/07/02 15:00:15 by avogt            ###   ########.fr       */
+/*   Updated: 2020/07/02 15:16:34 by avogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,22 @@ typedef struct	s_tab
     t_arg			*arg;    
 }               t_tab;
 
-int		ft_printf(const char *format, ...);
-t_tab   *set_tab(t_tab *tab);
-int     parse_fomat(t_tab *tab);
-t_tab   *set_arg(t_tab *tab);
-int     parse_arg(t_tab *tab);
-t_tab	*check_flags(t_tab *tab);
-t_tab	*check_field_width(t_tab *tab);
-t_tab	*check_precision(t_tab *tab);
-t_tab	*check_specifier(t_tab *tab);
-t_tab	*handle_d(t_tab *tab);
-t_tab	*handle_i(t_tab *tab);
-t_tab	*handle_u(t_tab *tab);
-t_tab	*handle_x(t_tab *tab);
-t_tab	*handle_c(t_tab *tab);
-t_tab	*handle_s(t_tab *tab);
-t_tab	*handle_p(t_tab *tab);
-t_tab	*redirect(t_tab *tab);
+int			ft_printf(const char *format, ...);
+t_tab		*set_tab(t_tab *tab);
+int			parse_fomat(t_tab *tab);
+t_tab   	*set_arg(t_tab *tab);
+int     	parse_arg(t_tab *tab);
+t_tab		*check_flags(t_tab *tab);
+t_tab		*check_field_width(t_tab *tab);
+t_tab		*check_precision(t_tab *tab);
+t_tab		*check_specifier(t_tab *tab);
+t_tab		*handle_d(t_tab *tab);
+t_tab		*handle_i(t_tab *tab);
+t_tab		*handle_u(t_tab *tab);
+t_tab		*handle_x(t_tab *tab);
+t_tab		*handle_c(t_tab *tab);
+t_tab		*handle_s(t_tab *tab);
+t_tab		*handle_p(t_tab *tab);
+t_tab		*redirect(t_tab *tab);
+long int	is_min(char *string, t_tab *tab, char *arg, long int pos);
 #endif
