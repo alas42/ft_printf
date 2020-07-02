@@ -6,7 +6,7 @@
 /*   By: avogt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 16:19:33 by avogt             #+#    #+#             */
-/*   Updated: 2020/06/23 15:01:45 by avogt            ###   ########.fr       */
+/*   Updated: 2020/07/02 14:09:42 by avogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static char	*get_string_x(char *arg, t_tab *tab, long int len_arg)
 		return (NULL);
 }
 
-t_tab	*handle_x(t_tab *tab)
+t_tab		*handle_x(t_tab *tab)
 {
 	char	*arg_to_print;
 	char	*s;
@@ -88,7 +88,7 @@ t_tab	*handle_x(t_tab *tab)
 	len_to_print = 0;
 	arg_to_print = ft_convert_base(va_arg(tab->ap, unsigned int), 16);
 	s = get_string_x(arg_to_print, tab, (long int)ft_strlen(arg_to_print));
-	if(s == NULL)
+	if (s == NULL)
 		exit(-1);
 	len_to_print = ft_strlen(s);
 	if (tab->argument->specifier == 'X')

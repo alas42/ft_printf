@@ -6,7 +6,7 @@
 /*   By: avogt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 16:16:46 by avogt             #+#    #+#             */
-/*   Updated: 2020/06/26 23:40:45 by avogt            ###   ########.fr       */
+/*   Updated: 2020/07/02 14:27:23 by avogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,16 @@ char		*get_string_p(char *arg, t_tab *tab, long int len_arg)
 	return (NULL);
 }
 
-t_tab	*handle_p(t_tab *tab)
+t_tab		*handle_p(t_tab *tab)
 {
-	char	*arg_to_print;
+	char	*arg;
 	char	*s;
 	size_t	len_to_print;
 
 	len_to_print = 0;
-	arg_to_print = ft_convert_base_l((unsigned long int)va_arg(tab->ap, void *), 16);
-	s = get_string_p(arg_to_print, tab, (long int)ft_strlen(arg_to_print));
-	if(s == NULL)
+	arg = ft_convert_base_l((unsigned long int)va_arg(tab->ap, void *), 16);
+	s = get_string_p(arg, tab, (long int)ft_strlen(arg));
+	if (s == NULL)
 		exit(-1);
 	ft_strlow(s);
 	len_to_print = ft_strlen(s);

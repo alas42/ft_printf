@@ -6,7 +6,7 @@
 /*   By: avogt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 16:18:52 by avogt             #+#    #+#             */
-/*   Updated: 2020/06/21 16:19:23 by avogt            ###   ########.fr       */
+/*   Updated: 2020/07/02 14:33:04 by avogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,8 @@ t_tab		*handle_u(t_tab *tab)
 
 	len_to_print = 0;
 	arg_to_print = ft_itoa(va_arg(tab->ap, unsigned int));
-	printf("arg_to_print : --%s-- len_arg : --%ld-- field_width : --%ld-- precision : --%ld--\n", arg_to_print, (long int)ft_strlen(arg_to_print), tab->argument->field_width, tab->argument->precision);
 	s = get_string_u(arg_to_print, tab, (long int)ft_strlen(arg_to_print));
-	if(s == NULL)
+	if (s == NULL)
 		exit(-1);
 	len_to_print = ft_strlen(s);
 	ft_putstr(s);
