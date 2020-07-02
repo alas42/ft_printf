@@ -12,6 +12,25 @@
 
 #include "ft_printf.h"
 
+static long int	get_c(t_tab *tab, long int len_arg)
+{
+	long int c;
+
+	c = 0;
+	if (tab->arg->prec > len_arg)
+	{
+		if (tab->arg->width > tab->arg->prec)
+			c = (arg[0] == '-') ? tab->arg->width - (tab->arg->prec + 1)
+				: tab->arg->width - tab->arg->prec;
+	}
+	else
+	{
+		if (tab->arg->width > len_arg)
+			c = tab->arg->width - len_arg;
+	}
+	return (c);
+}
+
 static long int	is_min(char *string, t_tab *tab, char *arg, long int pos)
 {
 	long int c;
@@ -53,17 +72,7 @@ static int		f_str_2(char *string, t_tab *tab, char *arg, long int len_arg)
 		string[i++] = arg[c++];
 	c = 0;
 	len_arg = (arg[0] == '-') ? len_arg + 1 : len_arg;
-	if (tab->arg->prec > len_arg)
-	{
-		if (tab->arg->width > tab->arg->prec)
-			c = (arg[0] == '-') ? tab->arg->width - (tab->arg->prec + 1)
-				: tab->arg->width - tab->arg->prec;
-	}
-	else
-	{
-		if (tab->arg->width > len_arg)
-			c = tab->arg->width - len_arg;
-	}
+	c = get_c(tab, len_arg);
 	while (c-- > 0)
 		string[i++] = ' ';
 	return (1);
@@ -78,17 +87,7 @@ static int		f_str_1(char *string, t_tab *tab, char *arg, long int len_arg)
 	c = 0;
 	if (!tab->arg->flags[0])
 	{
-		if (tab->arg->prec > len_arg)
-		{
-			if (tab->arg->width > tab->arg->prec)
-				c = (arg[0] == '-') ? tab->arg->width - (tab->arg->prec + 1)
-					: tab->arg->width - tab->arg->prec;
-		}
-		else
-		{
-			if (tab->arg->width > len_arg)
-				c = tab->arg->width - len_arg;
-		}
+		c = get_c(tab, len_arg);
 		while (c-- > 0)
 			string[i++] = (tab->arg->flags[1]) ? '0' : ' ';
 		c = 0;
