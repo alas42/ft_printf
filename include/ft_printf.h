@@ -6,7 +6,7 @@
 /*   By: avogt <avogt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 16:03:26 by avogt             #+#    #+#             */
-/*   Updated: 2020/06/21 14:06:33 by avogt            ###   ########.fr       */
+/*   Updated: 2020/07/02 15:00:15 by avogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,5 @@ t_tab	*handle_x(t_tab *tab);
 t_tab	*handle_c(t_tab *tab);
 t_tab	*handle_s(t_tab *tab);
 t_tab	*handle_p(t_tab *tab);
+t_tab	*redirect(t_tab *tab);
 #endif

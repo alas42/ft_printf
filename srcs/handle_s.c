@@ -6,13 +6,13 @@
 /*   By: avogt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 16:15:42 by avogt             #+#    #+#             */
-/*   Updated: 2020/07/02 14:49:45 by avogt            ###   ########.fr       */
+/*   Updated: 2020/07/02 15:01:23 by avogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-long int	get_length_s(long int length_copy_arg)
+long int	get_length_s(t_tab *tab, long int length_copy_arg)
 {
 	long int prec;
 	long int field_width;
@@ -48,7 +48,7 @@ t_tab		*handle_s(t_tab *tab)
 	i = -1;
 	copy_arg = va_arg(tab->ap, char *);
 	length_copy_arg = (long int)ft_strlen(copy_arg);
-	length_s = get_length_s(length_copy_arg);
+	length_s = get_length_s(tab, length_copy_arg);
 	copy_arg = (tab->arg->prec < length_copy_arg)
 		? ft_strsub(copy_arg, 0, tab->arg->prec) : copy_arg;
 	s = ft_strnew(length_s);
