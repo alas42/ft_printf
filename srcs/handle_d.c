@@ -6,7 +6,7 @@
 /*   By: avogt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 16:17:29 by avogt             #+#    #+#             */
-/*   Updated: 2020/07/02 14:31:44 by avogt            ###   ########.fr       */
+/*   Updated: 2020/07/02 15:17:35 by avogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,31 +29,6 @@ static long int	get_c(t_tab *tab, long int len_arg, char *arg)
 			c = tab->arg->width - len_arg;
 	}
 	return (c);
-}
-
-static long int	is_min(char *string, t_tab *tab, char *arg, long int pos)
-{
-	long int c;
-	long int i;
-	long int len_arg;
-
-	len_arg = ft_strlen(arg);
-	c = 0;
-	i = 0;
-	if (arg[0] == '-')
-	{
-		if (tab->arg->flags[0])
-		{
-			string[0] = '-';
-			return (len_arg - 1);
-		}
-		else
-		{
-			string[pos] = '-';
-			return (len_arg - 1);
-		}
-	}
-	return (len_arg);
 }
 
 static int		f_str_2(char *string, t_tab *tab, char *arg, long int len_arg)
