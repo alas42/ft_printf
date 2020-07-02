@@ -6,13 +6,13 @@
 #    By: avogt <avogt@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/18 16:09:40 by avogt             #+#    #+#              #
-#    Updated: 2020/06/20 14:30:10 by avogt            ###   ########.fr        #
+#    Updated: 2020/07/02 14:39:58 by avogt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 SOURCES = ft_printf.c parse_arg.c handle_c.c handle_s.c handle_p.c\
-	handle_d.c handle_i.c handle_u.c handle_x.c
+	handle_d.c handle_i.c handle_u.c handle_x.c redirect.c
 CC = gcc
 CFLAGS = -Werror -Wall -Wextra
 LIBFT = libft
