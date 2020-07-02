@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static long int	get_c(t_tab *tab, long int len_arg)
+static long int	get_c(t_tab *tab, long int len_arg, char *arg)
 {
 	long int c;
 
@@ -72,7 +72,7 @@ static int		f_str_2(char *string, t_tab *tab, char *arg, long int len_arg)
 		string[i++] = arg[c++];
 	c = 0;
 	len_arg = (arg[0] == '-') ? len_arg + 1 : len_arg;
-	c = get_c(tab, len_arg);
+	c = get_c(tab, len_arg, arg);
 	while (c-- > 0)
 		string[i++] = ' ';
 	return (1);
@@ -87,7 +87,7 @@ static int		f_str_1(char *string, t_tab *tab, char *arg, long int len_arg)
 	c = 0;
 	if (!tab->arg->flags[0])
 	{
-		c = get_c(tab, len_arg);
+		c = get_c(tab, len_arg, arg);
 		while (c-- > 0)
 			string[i++] = (tab->arg->flags[1]) ? '0' : ' ';
 		c = 0;
