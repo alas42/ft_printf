@@ -56,11 +56,14 @@ static int		f_str_2(char *string, t_tab *tab, char *arg, long int len_arg)
 	if (tab->arg->prec > len_arg)
 	{
 		if (tab->arg->width > tab->arg->prec)
-			c = (arg[0] == '-') ? tab->arg->width - (tab->arg->prec + 1) : tab->arg->width - tab->arg->prec;
+			c = (arg[0] == '-') ? tab->arg->width - (tab->arg->prec + 1)
+				: tab->arg->width - tab->arg->prec;
 	}
 	else
+	{
 		if (tab->arg->width > len_arg)
 			c = tab->arg->width - len_arg;
+	}
 	while (c-- > 0)
 		string[i++] = ' ';
 	return (1);
@@ -78,11 +81,14 @@ static int		f_str_1(char *string, t_tab *tab, char *arg, long int len_arg)
 		if (tab->arg->prec > len_arg)
 		{
 			if (tab->arg->width > tab->arg->prec)
-				c = (arg[0] == '-') ? tab->arg->width - (tab->arg->prec + 1) : tab->arg->width - tab->arg->prec;
+				c = (arg[0] == '-') ? tab->arg->width - (tab->arg->prec + 1)
+					: tab->arg->width - tab->arg->prec;
 		}
 		else
+		{
 			if (tab->arg->width > len_arg)
 				c = tab->arg->width - len_arg;
+		}
 		while (c-- > 0)
 			string[i++] = (tab->arg->flags[1]) ? '0' : ' ';
 		c = 0;
