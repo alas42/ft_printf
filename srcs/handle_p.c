@@ -67,10 +67,12 @@ t_tab		*handle_p(t_tab *tab)
 	if (ull == 0 && tab->arg->prec == 0)
 	{
 		char_count += ft_putstrprec("0x", 2);
-		return (char_count += ft_treat_width(tab->arg->width, 0, 1));
+		char_count += ft_treat_width(tab->arg->width, 0, 1);
+		tab->len += char_count;
+		return (tab);
 	}
 	pointer = ft_convert_base_ll(ull, 16);
-	pointer = ft_str_tolower(pointer);
+	pointer = ft_strlow(pointer);
 	if ((size_t)tab->arg->prec < ft_strlen(pointer))
 		tab->arg->prec = ft_strlen(pointer);
 	if (tab->arg->flags[0] == 1)
