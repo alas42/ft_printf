@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <limits.h>
 
 static int	fill_string_2(char *string, t_tab *tab, char *arg, long int pos)
 {
@@ -81,14 +82,13 @@ static char	*get_string_u(char *arg, t_tab *tab, long int len_arg)
 
 t_tab		*handle_u(t_tab *tab)
 {
-	char			*arg_to_print;
-	char			*s;
-	size_t			len_to_print;
-	unsigned int	unsi;
+	char		*arg_to_print;
+	char		*s;
+	size_t		len_to_print;
+	uintmax_t	num;
 
-	unsi = va_arg(tab->ap, unsigned int);
+	num = (unsigned int)(va_arg(tab->ap, unsigned int));
 	len_to_print = 0;
-	unsi = (unsigned int)(4294967295 + 1 + unsi);
 	s = get_string_u(arg_to_print, tab, (long int)ft_strlen(arg_to_print));
 	len_to_print = ft_strlen(s);
 	ft_putstr(s);
