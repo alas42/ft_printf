@@ -13,7 +13,7 @@
 #include "ft_printf.h"
 #include <limits.h>
 
-static int	fill_string_2(char *string, t_tab *tab, char *arg, long int pos)
+static t_tab	*fill_2(char *string, t_tab *tab, char *arg, long int pos)
 {
 	long int	i;
 	long int	j;
@@ -37,10 +37,10 @@ static int	fill_string_2(char *string, t_tab *tab, char *arg, long int pos)
 		if (tab->arg->width > len_arg)
 			while (i < tab->arg->width)
 				string[i++] = ' ';
-	return (1);
+	return (tab);
 }
 
-static int	fill_string(char *string, t_tab *tab, char *arg, long int len_arg)
+static t_tab	*fill_1(char *string, t_tab *tab, char *arg, long int len_arg)
 {
 	long int i;
 
@@ -56,12 +56,10 @@ static int	fill_string(char *string, t_tab *tab, char *arg, long int len_arg)
 					string[i] = ' ';
 				i++;
 			}
-	if (fill_string_2(string, tab, arg, i))
-		return (1);
-	return (-1);
+	return (f_string_2(string, tab, arg, i));
 }
 
-static char	*get_string_u(char *arg, t_tab *tab, long int len_arg)
+static char		*get_string_u(char *arg, t_tab *tab, long int len_arg)
 {
 	char	*string;
 
@@ -74,10 +72,8 @@ static char	*get_string_u(char *arg, t_tab *tab, long int len_arg)
 		string = ft_strnew(tab->arg->prec);
 	else
 		string = ft_strnew(len_arg);
-	if (fill_string(string, tab, arg, len_arg))
-		return (string);
-	else
-		return (NULL);
+	fill_string(string, tab, arg, len_arg);
+	return (string);
 }
 
 t_tab		*handle_u(t_tab *tab)
@@ -90,6 +86,11 @@ t_tab		*handle_u(t_tab *tab)
 	num = (unsigned int)(va_arg(tab->ap, unsigned int));
 	len_to_print = 0;
 	arg_to_print = ft_itoa_umax(num);
+	if (num == 0 && tab->arg->prec == 0)
+	{
+		display_char(tab, ' ', tab->arg->width, 1);
+		return (tab);
+	}
 	s = get_string_u(arg_to_print, tab, (long int)ft_strlen(arg_to_print));
 	len_to_print = ft_strlen(s);
 	ft_putstr(s);
