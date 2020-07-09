@@ -12,75 +12,72 @@
 
 #include "ft_printf.h"
 
-static int	fill_string2(char *string, char *arg, long int pos)
-{
-	long int i;
-	long int j;
-	long int len_arg;
 
-	j = 0;
-	len_arg = (long int)ft_strlen(arg);
-	i = pos;
-	while (j < len_arg)
-		string[i++] = arg[j++];
-	return (1);
+static int	ft_putstrprec(char *str, int prec)
+{
+	int char_count;
+
+	char_count = 0;
+	while (str[char_count] && char_count < prec)
+		ft_putchar(str[char_count++]);
+	return (char_count);
 }
 
-static int	fill_string(char *string, t_tab *tab, char *arg, long int len_arg)
+static int	ft_treat_width(int width, int minus, int has_zero)
 {
-	long int i;
-	long int j;
+	int char_count;
 
-	j = 0;
-	i = 0;
-	if (tab->arg->flags[0])
+	char_count = 0;
+	while (width - minus > 0)
 	{
-		string[i++] = '0';
-		string[i++] = 'x';
+		if (has_zero)
+			ft_putchar('0');
+		else
+			ft_putchar(' ');
+		width -= 1;
+		char_count++;
 	}
-	else
-	{
-		if (tab->arg->width >= len_arg + 2)
-			while (i < (tab->arg->width - (len_arg + 2)))
-				string[i++] = ' ';
-		string[i++] = '0';
-		string[i++] = 'x';
-	}
-	if (fill_string2(string, arg, i))
-		return (1);
-	else
-		return (-1);
+	return (char_count);
 }
 
-char		*get_string_p(char *arg, t_tab *tab, long int len_arg)
+static int	ft_in_put_part_pointer(char *pointer, t_tab *tab)
 {
-	char	*string;
+	int char_count;
 
-	string = NULL;
-	if (tab->arg->width >= len_arg + 2)
-		string = ft_strnew(tab->arg->width);
+	char_count = 0;
+	char_count += ft_putstrprec("0x", 2);
+	if (tab->arg->prec >= 0)
+	{
+		char_count += ft_treat_width(tab->arg->width, ft_strlen(pointer), 1);
+		char_count += ft_putstrprec(pointer, tab->arg->prec);
+	}
 	else
-		string = ft_strnew(len_arg + 2);
-	if (fill_string(string, tab, arg, len_arg))
-		return (string);
-	return (NULL);
+		char_count += ft_putstrprec(pointer, ft_strlen(pointer));
+	return (char_count);
 }
 
 t_tab		*handle_p(t_tab *tab)
 {
-	char	*arg;
-	char	*s;
-	size_t	len_to_print;
+	char				*pointer;
+	int					char_count;
+	unsigned long long	ull;
 
-	len_to_print = 0;
-	arg = ft_convert_base_ll((unsigned long long)va_arg(tab->ap, void *), 16);
-	s = get_string_p(arg, tab, (long int)ft_strlen(arg));
-	if (s == NULL)
-		exit(-1);
-	ft_strlow(s);
-	len_to_print = ft_strlen(s);
-	ft_putstr(s);
-	tab->len += len_to_print;
-	free(s);
-	return (tab);
+	ull = (unsigned long long)(va_arg(tab->ap, unsigned long long));
+	char_count = 0;
+	if (ull == 0 && tab->arg->prec == 0)
+	{
+		char_count += ft_putstrprec("0x", 2);
+		return (char_count += ft_treat_width(tab->arg->width, 0, 1));
+	}
+	pointer = ft_convert_base_ll(ull, 16);
+	pointer = ft_str_tolower(pointer);
+	if ((size_t)tab->arg->prec < ft_strlen(pointer))
+		tab->arg->prec = ft_strlen(pointer);
+	if (tab->arg->flags[0] == 1)
+		char_count += ft_in_put_part_pointer(pointer, tab);
+	char_count += ft_treat_width(tab->arg->width, ft_strlen(pointer) + 2, 0);
+	if (tab->arg->flags[0] == 0)
+		char_count += ft_in_put_part_pointer(pointer, tab);
+	free(pointer);
+	return (char_count);
 }
