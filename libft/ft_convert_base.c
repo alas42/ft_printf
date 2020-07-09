@@ -44,7 +44,7 @@ char	*ft_convert_base_l(unsigned long int n, int base)
 	return (ptr);
 }
 
-char	*ft_convert_base_ll(unsigned long long int n, int base)
+char	*ft_convert_base_ll(unsigned long long n, int base)
 {
 	static char representation[] = "0123456789ABCDEF";
 	static char buffer[50];

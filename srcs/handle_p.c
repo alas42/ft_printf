@@ -73,7 +73,7 @@ t_tab		*handle_p(t_tab *tab)
 	size_t	len_to_print;
 
 	len_to_print = 0;
-	arg = ft_convert_base_l((unsigned long int)va_arg(tab->ap, void *), 16);
+	arg = ft_convert_base_ll((unsigned long long)va_arg(tab->ap, void *), 16);
 	s = get_string_p(arg, tab, (long int)ft_strlen(arg));
 	if (s == NULL)
 		exit(-1);
