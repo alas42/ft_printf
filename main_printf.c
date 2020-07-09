@@ -20,7 +20,7 @@ int	main(void)
 	int 			champ;
 	int 			precision;
 
-	s = (char *)malloc(sizeof(char * 20));
+	s = (char *)malloc(sizeof(char) * (20 + 1));
 	s = ft_strdup("Hello World, test!");
 	champ = 10;
 	precision = 5;
