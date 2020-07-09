@@ -6,7 +6,7 @@
 /*   By: avogt <avogt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 16:03:26 by avogt             #+#    #+#             */
-/*   Updated: 2020/07/02 15:28:35 by avogt            ###   ########.fr       */
+/*   Updated: 2020/07/09 19:20:51 by avogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ typedef struct	s_arg
 typedef struct	s_tab
 {
 	const char	*format;
-	char		*f_diff;
+	char		*f_copy;
+	char		*f_copy2;
 	va_list		ap;
 	int			len;
 	size_t		i;
@@ -39,7 +40,6 @@ typedef struct	s_tab
 }				t_tab;
 
 int				ft_printf(const char *format, ...);
-t_tab			*set_tab(t_tab *tab);
 int				parse_fomat(t_tab *tab);
 t_tab			*set_arg(t_tab *tab);
 int				parse_arg(t_tab *tab);

@@ -6,7 +6,7 @@
 /*   By: avogt <avogt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 16:43:31 by avogt             #+#    #+#             */
-/*   Updated: 2020/07/02 14:21:57 by avogt            ###   ########.fr       */
+/*   Updated: 2020/07/09 19:21:28 by avogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,6 @@ t_tab	*set_arg(t_tab *tab)
 	tab->arg->width = 0;
 	tab->arg->specifier = '\0';
 	tab->arg->redirector = -1;
-	return (tab);
-}
-
-t_tab	*set_tab(t_tab *tab)
-{
-	tab->i = 0;
-	tab->len = 0;
-	tab->f_copy = (char *)tab->format;
-	tab->f_diff = (char *)tab->format;
 	return (tab);
 }
 
@@ -64,7 +55,10 @@ int		ft_printf(const char *format, ...)
 	if (!(tab = (t_tab*)malloc(sizeof(t_tab))))
 		return (-1);
 	tab->format = format;
-	tab = set_tab(tab);
+	tab->i = 0;
+	tab->len = 0;
+	tab->f_copy = (char *)tab->format;
+	tab->f_copy2 = (char *)tab->format;
 	if (format)
 	{
 		va_start(tab->ap, format);

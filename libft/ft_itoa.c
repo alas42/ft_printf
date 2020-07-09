@@ -6,7 +6,7 @@
 /*   By: avogt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 15:22:12 by avogt             #+#    #+#             */
-/*   Updated: 2019/09/16 16:20:28 by avogt            ###   ########.fr       */
+/*   Updated: 2020/07/09 19:13:31 by avogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char		*ft_itoa_ll(long long int n)
 	return (result);
 }
 
-char		*ft_itoa_umax(uintmax_t	n)
+char		*ft_itoa_umax(uintmax_t n)
 {
 	char		*result;
 	size_t		len;
