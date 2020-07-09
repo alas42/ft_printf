@@ -63,8 +63,11 @@ static int		f_str_1(char *string, t_tab *tab, char *arg, long int len_arg)
 	if (!tab->arg->flags[0])
 	{
 		c = get_c(tab, len_arg, arg);
-		len_arg = is_min(string, tab, arg, i);
-		i = (arg[0] == '-') ? i + 1 : i;
+		if (!tab->arg->flags[1])
+		{
+			len_arg = is_min(string, tab, arg, i);
+			i = (arg[0] == '-') ? i + 1 : i;
+		}
 		while (c-- > 0)
 			string[i++] = (tab->arg->flags[1]) ? '0' : ' ';
 		c = 0;
@@ -76,8 +79,7 @@ static int		f_str_1(char *string, t_tab *tab, char *arg, long int len_arg)
 			string[i++] = arg[c++];
 		return (1);
 	}
-	else
-		return (f_str_2(string, tab, arg, len_arg));
+	return (f_str_2(string, tab, arg, len_arg));
 }
 
 static char		*get_string_d(char *arg_to_print, t_tab *tab, int arg)
