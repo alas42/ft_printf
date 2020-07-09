@@ -121,7 +121,8 @@ t_tab			*handle_d(t_tab *tab)
 		exit(-1);
 	len_to_print = ft_strlen(string);
 	ft_putstr(string);
-	ft_strdel(&string);
-	ft_strdel(&arg_to_print);
+	tab->len += len_to_print;
+	free(&string);
+	free(&arg_to_print);
 	return (tab);
 }
