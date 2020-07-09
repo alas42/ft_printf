@@ -19,7 +19,7 @@ t_tab	*set_arg(t_tab *tab)
 	i = -1;
 	if (!(tab->arg = (t_arg*)malloc(sizeof(t_arg))))
 		return (NULL);
-	while (++i < 6)
+	while (++i < 2)
 		tab->arg->flags[i] = '\0';
 	tab->arg->prec = -1;
 	tab->arg->width = 0;

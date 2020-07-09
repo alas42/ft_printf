@@ -20,7 +20,8 @@ int	main(void)
 	int 			champ;
 	int 			precision;
 
-	s = "Hello World, test!";
+	s = (char *)malloc(sizeof(char * 20));
+	s = ft_strdup("Hello World, test!");
 	champ = 10;
 	precision = 5;
 	test = 30;
@@ -103,7 +104,8 @@ int	main(void)
 	ft_printf("%-p 0\n", &test);
 	printf("%-p 0\n", &test);
 	ft_printf("%45p 45\n", &test);
-	printf("%45p 45\n", &test);;
-	system("leaks a.out");	
+	printf("%45p 45\n", &test);
+	free(s);
+	system("leaks a.out");
 	return (0);
 }
