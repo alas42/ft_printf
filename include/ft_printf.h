@@ -57,4 +57,5 @@ t_tab			*handle_s(t_tab *tab);
 t_tab			*handle_p(t_tab *tab);
 t_tab			*redirect(t_tab *tab);
 long int		is_min(char *string, t_tab *tab, char *arg, long int pos);
+void			display_char(t_tab *tab, char c, int len, int update_len);
 #endif
