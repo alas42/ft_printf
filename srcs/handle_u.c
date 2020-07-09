@@ -89,6 +89,7 @@ t_tab		*handle_u(t_tab *tab)
 
 	num = (unsigned int)(va_arg(tab->ap, unsigned int));
 	len_to_print = 0;
+	arg_to_print = ft_itoa_umax(num);
 	s = get_string_u(arg_to_print, tab, (long int)ft_strlen(arg_to_print));
 	len_to_print = ft_strlen(s);
 	ft_putstr(s);

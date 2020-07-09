@@ -100,6 +100,7 @@ char				*ft_itoa(int n);
 char				*ft_itoa_u(unsigned int u);
 char				*ft_itoa_ul(unsigned long int u);
 char				*ft_itoa_ull(unsigned long long int u);
+char				*ft_itoa_umax(uintmax_t	num);
 char				*ft_itoa_l(long int n);
 char				*ft_itoa_ll(long long int n);
 char				**ft_strsplit(char const *s, char c);

@@ -98,3 +98,26 @@ char		*ft_itoa_ll(long long int n)
 	}
 	return (result);
 }
+
+char		*ft_itoa_umax(uintmax_t	num)
+{
+	char		*result;
+	size_t		len;
+	uintmax_t	tmp;
+
+	len = 1;
+	tmp = n;
+	while ((tmp /= 10) != 0)
+		len++;
+	if (!(result = (char *)malloc(sizeof(char) * len + 1)))
+		return (NULL);
+	result[len] = '\0';
+	while (len--)
+	{
+		result[len] = ((n % 10) + '0');
+		n /= 10;
+		if (n == 0)
+			return (result);
+	}
+	return (result);
+}
