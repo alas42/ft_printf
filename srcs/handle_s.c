@@ -12,54 +12,31 @@
 
 #include "ft_printf.h"
 
-long int	get_length_s(t_tab *tab, long int length_copy_arg)
-{
-	long int prec;
-	long int field_width;
-	long int length_s;
-
-	length_s = 0;
-	prec = tab->arg->prec;
-	field_width = tab->arg->width;
-	if (prec < 0 ||
-		prec >= length_copy_arg)
-	{
-		length_s = (field_width >= length_copy_arg)
-			? field_width : length_copy_arg;
-	}
-	else
-	{
-		length_s = (field_width >= length_copy_arg)
-			? field_width - (length_copy_arg - prec) : prec;
-	}
-	prec = (prec < 0 || prec >= length_copy_arg) ? length_copy_arg : prec;
-	tab->arg->prec = prec;
-	return (length_s);
-}
-
 t_tab		*handle_s(t_tab *tab)
 {
 	char		*s;
-	long int	i;
-	char		*copy_arg;
-	long int	length_s;
-	long int	length_copy_arg;
+	int			i;
+	int			len;
 
-	i = -1;
-	copy_arg = va_arg(tab->ap, char *);
-	length_copy_arg = (long int)ft_strlen(copy_arg);
-	length_s = get_length_s(tab, length_copy_arg);
-	copy_arg = (tab->arg->prec < length_copy_arg)
-		? ft_strsub(copy_arg, 0, tab->arg->prec) : copy_arg;
-	s = ft_strnew(length_s);
-	if (!tab->arg->flags[0] && tab->arg->width > length_s)
-		while (++i < tab->arg->width - length_s)
-			s[i] = ' ';
-	s = ft_strcat(s, copy_arg);
-	if (tab->arg->flags[0] && tab->arg->width > length_s)
-		while (++i < tab->arg->width - length_s)
-			s[i] = ' ';
+	i = 0;
+	s = va_arg(tab->args, char *);
+	if (tab->arg->prec > -1 && s)
+		s = ft_strndup(s, tab->arg->prec);
+	else if (tab->arg->prec == -1 && s)
+		s = ft_strdup(s);
+	else if (tab->arg->prec > -1 && !s)
+		s = ft_strndup("(null)", tab->arg->prec);
+	else if (tab->arg->prec == -1 && !s)
+		s = ft_strdup("(null)");
+	len = ft_strlen(s);
+	tab->len += len;
+	if (tab->convert[3] == '0' && tab->convert[0] != '-')
+		display_char(tab, '0', tab->arg->width - len, 1);
+	else if (tab->convert[0] != '-')
+		display_char(tab, ' ', tab->arg->width - len, 1);
 	ft_putstr(s);
+	if (tab->convert[0] == '-')
+		display_char(tab, ' ', tab->arg->width - len, 1);
 	free(s);
 	return (tab);
 }
