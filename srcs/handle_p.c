@@ -72,7 +72,7 @@ t_tab		*handle_p(t_tab *tab)
 		return (tab);
 	}
 	pointer = ft_convert_base_ll(ull, 16);
-	pointer = ft_strlow(pointer);
+	ft_strlow(pointer);
 	if ((size_t)tab->arg->prec < ft_strlen(pointer))
 		tab->arg->prec = ft_strlen(pointer);
 	if (tab->arg->flags[0] == 1)
