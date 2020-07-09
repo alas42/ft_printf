@@ -20,14 +20,14 @@ t_tab	*check_flags(t_tab *tab)
 	i = 0;
 	while (flags[i] != '\0')
 	{
-		while (tab->f_diff[tab->i] == flags[i])
+		while (tab->f_copy2[tab->i] == flags[i])
 		{
-			while (tab->f_diff[tab->i] == '-')
+			while (tab->f_copy2[tab->i] == '-')
 			{
 				tab->arg->flags[0] = '-';
 				tab->i++;
 			}
-			while (tab->f_diff[tab->i] == '0')
+			while (tab->f_copy2[tab->i] == '0')
 			{
 				tab->arg->flags[1] = '0';
 				tab->i++;
@@ -41,7 +41,7 @@ t_tab	*check_flags(t_tab *tab)
 
 t_tab	*check_field_width(t_tab *tab)
 {
-	if (tab->f_diff[tab->i] == '*')
+	if (tab->f_copy2[tab->i] == '*')
 	{
 		tab->arg->width = (long int)va_arg(tab->ap, int);
 		tab->i++;
@@ -51,12 +51,12 @@ t_tab	*check_field_width(t_tab *tab)
 			tab->arg->flags[0] = 1;
 		}
 	}
-	else if (tab->f_diff[tab->i] >= '0' && tab->f_diff[tab->i] <= '9')
+	else if (tab->f_copy2[tab->i] >= '0' && tab->f_copy2[tab->i] <= '9')
 	{
-		while (tab->f_diff[tab->i] >= '0' && tab->f_diff[tab->i] <= '9')
+		while (tab->f_copy2[tab->i] >= '0' && tab->f_copy2[tab->i] <= '9')
 		{
 			tab->arg->width *= 10;
-			tab->arg->width += (tab->f_diff[tab->i] - 48);
+			tab->arg->width += (tab->f_copy2[tab->i] - 48);
 			tab->i++;
 		}
 	}
@@ -65,23 +65,23 @@ t_tab	*check_field_width(t_tab *tab)
 
 t_tab	*check_precision(t_tab *tab)
 {
-	if (tab->f_diff[tab->i] == '.')
+	if (tab->f_copy2[tab->i] == '.')
 	{
 		tab->i++;
 		tab->arg->prec = 0;
-		if (tab->f_diff[tab->i] == '*')
+		if (tab->f_copy2[tab->i] == '*')
 		{
 			tab->arg->prec = (long int)va_arg(tab->ap, int);
 			tab->arg->prec = (tab->arg->prec < -1) ? -1
 				: tab->arg->prec;
 			tab->i++;
 		}
-		else if (tab->f_diff[tab->i] >= '0' && tab->f_diff[tab->i] <= '9')
+		else if (tab->f_copy2[tab->i] >= '0' && tab->f_copy2[tab->i] <= '9')
 		{
-			while (tab->f_diff[tab->i] >= '0' && tab->f_diff[tab->i] <= '9')
+			while (tab->f_copy2[tab->i] >= '0' && tab->f_copy2[tab->i] <= '9')
 			{
 				tab->arg->prec *= 10;
-				tab->arg->prec += (tab->f_diff[tab->i] - 48);
+				tab->arg->prec += (tab->f_copy2[tab->i] - 48);
 				tab->i++;
 			}
 		}
@@ -99,7 +99,7 @@ t_tab	*check_specifier(t_tab *tab)
 	i = 0;
 	while (specifiers[i] != '\0')
 	{
-		if (specifiers[i] == tab->f_diff[tab->i])
+		if (specifiers[i] == tab->f_copy2[tab->i])
 		{
 			tab->arg->specifier = specifiers[i];
 			tab->arg->redirector = i;
