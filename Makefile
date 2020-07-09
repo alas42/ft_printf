@@ -13,7 +13,7 @@
 NAME = libftprintf.a
 SOURCES = ft_printf.c parse_arg.c handle_c.c handle_s.c handle_p.c\
 	handle_d.c handle_i.c handle_u.c handle_x.c redirect.c is_min.c\
-	display_char.c
+	display_char.c handle_percent.c
 CC = gcc
 CFLAGS = -Werror -Wall -Wextra
 LIBFT = libft

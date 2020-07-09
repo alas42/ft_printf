@@ -88,7 +88,7 @@ t_tab	*check_precision(t_tab *tab)
 
 t_tab	*check_specifier(t_tab *tab)
 {
-	static char specifiers[] = "diuxXcsp\0";
+	static char specifiers[] = "diuxXcsp%\0";
 	int			i;
 
 	i = 0;

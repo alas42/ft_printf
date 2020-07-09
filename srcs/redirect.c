@@ -14,7 +14,7 @@
 
 t_tab	*redirect(t_tab *tab)
 {
-	t_tab	*(*redirection[9])(t_tab *tab);
+	t_tab	*(*redirection[10])(t_tab *tab);
 
 	redirection[0] = handle_d;
 	redirection[1] = handle_i;
@@ -24,7 +24,8 @@ t_tab	*redirect(t_tab *tab)
 	redirection[5] = handle_c;
 	redirection[6] = handle_s;
 	redirection[7] = handle_p;
-	redirection[8] = NULL;
+	redirection[8] = handle_percent;
+	redirection[9] = NULL;
 	redirection[tab->arg->redirector](tab);
 	return (tab);
 }
