@@ -35,7 +35,8 @@ int		parse_format(t_tab *tab)
 		if (tab->f_copy[tab->i] == '%')
 		{
 			tab->i++;
-			set_arg(tab);
+			if (!(set_arg(tab))
+				exit(-1);
 			parse_arg(tab);
 		}
 		else
@@ -44,6 +45,8 @@ int		parse_format(t_tab *tab)
 			tab->len++;
 		}
 		tab->i++;
+		if (tab->arg)
+			free(tab->arg);
 	}
 	return (tab->len);
 }
