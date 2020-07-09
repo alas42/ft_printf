@@ -31,98 +31,52 @@ static long int	get_c(t_tab *tab, long int len_arg, char *arg)
 	return (c);
 }
 
-static int		f_str_2(char *string, t_tab *tab, char *arg, long int len_arg)
+static t_tab	*get_string_d(char *arg_to_print, t_tab *tab, int arg)
 {
-	long int c;
-	long int i;
-
-	c = 0;
-	i = (arg[0] == '-') ? 1 : 0;
-	len_arg = is_min(string, tab, arg, i);
-	if (tab->arg->prec > len_arg)
-		while (c++ < tab->arg->prec - len_arg)
-			string[i++] = '0';
-	c = (arg[0] == '-') ? 1 : 0;
-	while (arg[c] != '\0')
-		string[i++] = arg[c++];
-	c = 0;
-	len_arg = (arg[0] == '-') ? len_arg + 1 : len_arg;
-	c = get_c(tab, len_arg, arg);
-	while (c-- > 0)
-		string[i++] = ' ';
-	return (1);
-}
-
-static int		f_str_1(char *string, t_tab *tab, char *arg, long int len_arg)
-{
-	long int	c;
-	long int	i;
-
-	i = 0;
-	c = 0;
-	if (!tab->arg->flags[0])
-	{
-		c = get_c(tab, len_arg, arg);
-		if (tab->arg->flags[1])
-		{
-			len_arg = is_min(string, tab, arg, i);
-			i = (arg[0] == '-') ? i + 1 : i;
-		}
-		while (c-- > 0)
-			string[i++] = (tab->arg->flags[1]) ? '0' : ' ';
-		c = 0;
-		if (tab->arg->prec > len_arg)
-			while (c++ < tab->arg->prec - len_arg)
-				string[i++] = '0';
-		c = (arg[0] == '-') ? 1 : 0;
-		while (arg[c] != '\0')
-			string[i++] = arg[c++];
-		return (1);
-	}
-	return (f_str_2(string, tab, arg, len_arg));
-}
-
-static char		*get_string_d(char *arg_to_print, t_tab *tab, int arg)
-{
-	char		*string;
+	long int	placed;
 	long int	len_arg;
-	char		signe;
 
-	signe = (arg < 0) ? '-' : '+';
-	len_arg = (long int)ft_strlen(arg_to_print);
-	len_arg = (signe == '-') ? len_arg - 1 : len_arg;
-	string = NULL;
-	if (tab->arg->width >= tab->arg->prec
-		&& tab->arg->width > len_arg)
-		string = ft_strnew(tab->arg->width);
-	else if (tab->arg->width < tab->arg->prec
-		&& tab->arg->prec > len_arg)
-		string = (signe == '-') ? ft_strnew(tab->arg->prec + 1)
-			: ft_strnew(tab->arg->prec);
-	else if (signe == '-')
-		string = ft_strnew(len_arg + 1);
-	else
-		string = ft_strnew(len_arg);
-	if (f_str_1(string, tab, arg_to_print, (long int)ft_strlen(arg_to_print)))
-		return (string);
-	return (NULL);
+	len_arg = ft_strlen(arg_to_print);
+	len_arg = (arg_to_print[0] == '-') ? len_arg - 1 : len_arg;
+	arg = (arg < 0) ? arg * -1 : arg;
+	if (tab->arg->flags[1] && tab->arg->prec == -1 && !tab->arg->flags[0])
+	{
+		tab->arg->prec = tab->arg->width;
+		if (arg[0] == '-' || tab->arg->flags[0])
+			tab->arg->prec--;
+	}
+	placed = len_arg;
+	if (len_arg <= tab->arg->prec && tab->arg->prec >= 0)
+		placed = tab->arg->prec;
+	if (arg[0] == '-')
+		placed++;
+	tab->len += (placed <= tab->arg->width) ? tab->arg->width : placed;
+	if (!tab->arg->flags[0])
+		display_char(tab, ' ', tab->arg->width - placed, 0);
+	if (arg[0] == '-')
+		write(1, &arg[0], 1);
+	display_char(tab, '0', tab->arg->prec - len_arg, 0);
+	ft_putnbr_fd(arg, 1);
+	if (tab->arg->flags[0])
+		display_char(tab, ' ', tab->arg->width - placed, 0);
+	return (tab)
 }
 
 t_tab			*handle_d(t_tab *tab)
 {
 	int			arg;
 	char		*arg_to_print;
-	char		*string;
 	size_t		len_to_print;
 
 	len_to_print = 0;
 	arg = va_arg(tab->ap, int);
 	arg_to_print = ft_itoa(arg);
-	string = get_string_d(arg_to_print, tab, arg);
-	len_to_print = ft_strlen(string);
-	ft_putstr(string);
-	tab->len += len_to_print;
-	free(string);
+	if (arg == 0 && tab->arg->prec == 0)
+	{
+		display_char(tab, ' ', tab->arg->width, 1);
+		return (tab);
+	}
+	get_string_d(arg_to_print, tab, arg);
 	free(arg_to_print);
 	return (tab);
 }

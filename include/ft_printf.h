@@ -49,7 +49,6 @@ t_tab			*check_field_width(t_tab *tab);
 t_tab			*check_precision(t_tab *tab);
 t_tab			*check_specifier(t_tab *tab);
 t_tab			*handle_d(t_tab *tab);
-t_tab			*handle_i(t_tab *tab);
 t_tab			*handle_u(t_tab *tab);
 t_tab			*handle_x(t_tab *tab);
 t_tab			*handle_c(t_tab *tab);
