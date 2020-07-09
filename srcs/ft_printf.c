@@ -45,8 +45,6 @@ int		parse_format(t_tab *tab)
 			tab->len++;
 		}
 		tab->i++;
-		if (tab->arg != NULL)
-			free(tab->arg);
 	}
 	return (tab->len);
 }
