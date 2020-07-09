@@ -42,24 +42,24 @@ static t_tab	*get_string_d(char *arg_to_print, t_tab *tab, int arg)
 	if (tab->arg->flags[1] && tab->arg->prec == -1 && !tab->arg->flags[0])
 	{
 		tab->arg->prec = tab->arg->width;
-		if (arg[0] == '-' || tab->arg->flags[0])
+		if (arg_to_print[0] == '-' || tab->arg->flags[0])
 			tab->arg->prec--;
 	}
 	placed = len_arg;
 	if (len_arg <= tab->arg->prec && tab->arg->prec >= 0)
 		placed = tab->arg->prec;
-	if (arg[0] == '-')
+	if (arg_to_print[0] == '-')
 		placed++;
 	tab->len += (placed <= tab->arg->width) ? tab->arg->width : placed;
 	if (!tab->arg->flags[0])
 		display_char(tab, ' ', tab->arg->width - placed, 0);
-	if (arg[0] == '-')
-		write(1, &arg[0], 1);
+	if (arg_to_print[0] == '-')
+		write(1, &arg_to_print[0], 1);
 	display_char(tab, '0', tab->arg->prec - len_arg, 0);
 	ft_putnbr_fd(arg, 1);
 	if (tab->arg->flags[0])
 		display_char(tab, ' ', tab->arg->width - placed, 0);
-	return (tab)
+	return (tab);
 }
 
 t_tab			*handle_d(t_tab *tab)
