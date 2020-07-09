@@ -17,13 +17,16 @@ t_tab	*handle_c(t_tab *tab)
 	char		c;
 
 	c = (char)va_arg(tab->ap, int);
-	if (tab->arg->flags[1] && tab->arg->flags[0] == 0)
-		display_char(tab, '0', tab->arg->width - 1, 1);
-	else if (!tab->arg->flags[0])
-		display_char(tab, ' ', tab->arg->width - 1, 1);
-	tab->len += 1;
-	write(1, &c, 1);
 	if (tab->arg->flags[0])
-		display_char(tab, ' ', tab->arg->width - 1, 1);
+		write(1, &c, 1);
+	while (tab->arg->width - 1 > 0)
+	{
+		ft_putchar(' ');
+		tab->arg->width--;
+		tab->len += 1;
+	}
+	tab->len += 1;
+	if (!tab->arg->flags[0])
+		write(1, &c, 1);
 	return (tab);
 }
