@@ -6,7 +6,7 @@
 /*   By: avogt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 16:18:52 by avogt             #+#    #+#             */
-/*   Updated: 2020/07/02 14:33:04 by avogt            ###   ########.fr       */
+/*   Updated: 2020/07/09 15:31:49 by avogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static char		*get_string_u(char *arg, t_tab *tab, long int len_arg)
 	return (string);
 }
 
-t_tab		*handle_u(t_tab *tab)
+t_tab			*handle_u(t_tab *tab)
 {
 	char		*arg_to_print;
 	char		*s;

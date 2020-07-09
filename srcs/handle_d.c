@@ -6,11 +6,22 @@
 /*   By: avogt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 16:17:29 by avogt             #+#    #+#             */
-/*   Updated: 2020/07/02 15:17:35 by avogt            ###   ########.fr       */
+/*   Updated: 2020/07/09 15:32:47 by avogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+static t_tab	*change_arg_prec(char *arg_to_print, t_tab *tab)
+{
+	if (tab->arg->flags[1] && tab->arg->prec == -1 && !tab->arg->flags[0])
+	{
+		tab->arg->prec = tab->arg->width;
+		if (arg_to_print[0] == '-' || tab->arg->flags[0])
+			tab->arg->prec--;
+	}
+	return (tab);
+}
 
 static t_tab	*get_string_d(char *arg_to_print, t_tab *tab, long int arg)
 {
@@ -20,12 +31,7 @@ static t_tab	*get_string_d(char *arg_to_print, t_tab *tab, long int arg)
 	len_arg = ft_strlen(arg_to_print);
 	len_arg = (arg_to_print[0] == '-') ? len_arg - 1 : len_arg;
 	arg = (arg < 0) ? arg * -1 : arg;
-	if (tab->arg->flags[1] && tab->arg->prec == -1 && !tab->arg->flags[0])
-	{
-		tab->arg->prec = tab->arg->width;
-		if (arg_to_print[0] == '-' || tab->arg->flags[0])
-			tab->arg->prec--;
-	}
+	change_arg_prec(arg_to_print, tab);
 	placed = len_arg;
 	if (len_arg <= tab->arg->prec && tab->arg->prec >= 0)
 		placed = tab->arg->prec;

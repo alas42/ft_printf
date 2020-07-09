@@ -6,7 +6,7 @@
 /*   By: avogt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 16:16:46 by avogt             #+#    #+#             */
-/*   Updated: 2020/07/02 14:27:23 by avogt            ###   ########.fr       */
+/*   Updated: 2020/07/09 15:30:31 by avogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ t_tab				*handle_p(t_tab *tab)
 		align_left = 1;
 	if (tab->arg->prec == 0 && num == 0)
 		*str = '\0';
-	if (tab->arg->flags[1] == '0' && tab->arg->prec == -1 && !tab->arg->flags[0])
+	if (tab->arg->flags[1] == '0' && tab->arg->prec == -1
+			&& !tab->arg->flags[0])
 	{
 		tab->arg->prec = tab->arg->width - 2;
 		tab->arg->width = 0;
