@@ -79,5 +79,6 @@ t_tab		*handle_p(t_tab *tab)
 	if (tab->arg->flags[0] == 0)
 		char_count += ft_in_put_part_pointer(pointer, tab);
 	free(pointer);
-	return (char_count);
+	tab->len += char_count;
+	return (tab);
 }
