@@ -12,25 +12,6 @@
 
 #include "ft_printf.h"
 
-static long int	get_c(t_tab *tab, long int len_arg, char *arg)
-{
-	long int c;
-
-	c = 0;
-	if (tab->arg->prec > len_arg)
-	{
-		if (tab->arg->width > tab->arg->prec)
-			c = (arg[0] == '-') ? tab->arg->width - (tab->arg->prec + 1)
-				: tab->arg->width - tab->arg->prec;
-	}
-	else
-	{
-		if (tab->arg->width > len_arg)
-			c = tab->arg->width - len_arg;
-	}
-	return (c);
-}
-
 static t_tab	*get_string_d(char *arg_to_print, t_tab *tab, int arg)
 {
 	long int	placed;
