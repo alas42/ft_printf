@@ -21,7 +21,7 @@
 
 typedef struct	s_arg
 {
-	char		flags[6];
+	char		flags[2];
 	long int	width;
 	long int	prec;
 	char		specifier;
@@ -31,7 +31,6 @@ typedef struct	s_arg
 typedef struct	s_tab
 {
 	const char	*format;
-	char		*f_copy;
 	char		*f_diff;
 	va_list		ap;
 	int			len;
