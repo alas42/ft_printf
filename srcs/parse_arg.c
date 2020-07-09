@@ -45,6 +45,11 @@ t_tab	*check_field_width(t_tab *tab)
 	{
 		tab->arg->width = (long int)va_arg(tab->ap, int);
 		tab->i++;
+		if (tab->arg->width < 0)
+		{
+			tab->arg->width *= -1;
+			tab->arg->flags[0] = 1;
+		}
 	}
 	else if (tab->f_diff[tab->i] >= '0' && tab->f_diff[tab->i] <= '9')
 	{
