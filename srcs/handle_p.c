@@ -38,7 +38,7 @@ t_tab				*handle_p(t_tab *tab)
 	int			align_left;
 
 	align_left = 0;
-	num = (unsigned long)(va_arg(tab->args, unsigned long int));
+	num = (unsigned long)(va_arg(tab->ap, unsigned long int));
 	num = (uintmax_t)num;
 	if (!(str = ft_itoa_base(num, 16, 'a')))
 		exit(-1);
