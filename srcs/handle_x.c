@@ -87,8 +87,8 @@ t_tab		*handle_x(t_tab *tab)
 	uintmax_t	num;
 
 	len_to_print = 0;
-	num = (unsigned int)(va_arg(tab->ap, unsigned int));
-	arg_to_print = ft_convert_base(num, 16);
+	num = (uintmax_t)((unsigned int)(va_arg(tab->ap, unsigned int)));
+	arg_to_print = ft_itoa_base(num, 16);
 	if (num == 0 && tab->precision == 0)
 	{
 		display_char(tab, ' ', tab->arg->width, 1);
