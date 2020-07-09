@@ -56,7 +56,7 @@ static t_tab	*fill_1(char *string, t_tab *tab, char *arg, long int len_arg)
 					string[i] = ' ';
 				i++;
 			}
-	return (f_string_2(string, tab, arg, i));
+	return (fill_2(string, tab, arg, i));
 }
 
 static char		*get_string_u(char *arg, t_tab *tab, long int len_arg)
@@ -72,7 +72,7 @@ static char		*get_string_u(char *arg, t_tab *tab, long int len_arg)
 		string = ft_strnew(tab->arg->prec);
 	else
 		string = ft_strnew(len_arg);
-	fill_string(string, tab, arg, len_arg);
+	fill_1(string, tab, arg, len_arg);
 	return (string);
 }
 
