@@ -51,6 +51,6 @@ t_tab				*handle_p(t_tab *tab)
 		tab->arg->prec = tab->arg->width - 2;
 		tab->arg->width = 0;
 	}
-	print_u(tab, str, align_left);
+	display_string_u(tab, str, align_left);
 	return (tab);
 }
