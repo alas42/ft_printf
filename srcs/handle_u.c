@@ -81,12 +81,14 @@ static char	*get_string_u(char *arg, t_tab *tab, long int len_arg)
 
 t_tab		*handle_u(t_tab *tab)
 {
-	char	*arg_to_print;
-	char	*s;
-	size_t	len_to_print;
+	char			*arg_to_print;
+	char			*s;
+	size_t			len_to_print;
+	unsigned int	unsi;
 
+	unsi = va_arg(tab->ap, unsigned int);
 	len_to_print = 0;
-	arg_to_print = ft_itoa(va_arg(tab->ap, unsigned int));
+	unsi = (unsigned int)(4294967295 + 1 + unsi);
 	s = get_string_u(arg_to_print, tab, (long int)ft_strlen(arg_to_print));
 	len_to_print = ft_strlen(s);
 	ft_putstr(s);
