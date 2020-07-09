@@ -99,7 +99,7 @@ char		*ft_itoa_ll(long long int n)
 	return (result);
 }
 
-char		*ft_itoa_umax(uintmax_t	num)
+char		*ft_itoa_umax(uintmax_t	n)
 {
 	char		*result;
 	size_t		len;
