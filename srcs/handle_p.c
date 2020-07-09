@@ -12,77 +12,45 @@
 
 #include "ft_printf.h"
 
-#include "ft_printf.h"
-
-
-static int	ft_putstrprec(char *str, int prec)
+static t_tab		*print_u(t_tab *tab, char *str, int align_left)
 {
-	int char_count;
+	int			not_blank;
+	int			num_width;
 
-	char_count = 0;
-	while (str[char_count] && char_count < prec)
-		ft_putchar(str[char_count++]);
-	return (char_count);
+	num_width = ft_strlen(str) + 2;
+	not_blank = num_width;
+	tab->len += (not_blank <= tab->arg->width) ? tab->arg->width : not_blank;
+	if (!align_left)
+		display_char(tab, ' ', tab->arg->width - not_blank, 0);
+	write(1, "0x", 2);
+	display_char(tab, '0', (tab->arg->prec - num_width) + 2, 1);
+	ft_putstr(str);
+	if (align_left)
+		display_char(tab, ' ', tab->arg->width - not_blank, 0);
+	free(str);
+	return (tab);
 }
 
-static int	ft_treat_width(int width, int minus, int has_zero)
+t_tab				*handle_p(t_tab *tab)
 {
-	int char_count;
+	char		*str;
+	uintmax_t	num;
+	int			align_left;
 
-	char_count = 0;
-	while (width - minus > 0)
+	align_left = 0;
+	num = (unsigned long)(va_arg(tab->args, unsigned long int));
+	num = (uintmax_t)num;
+	if (!(str = ft_itoa_base(num, 16, 'a')))
+		exit(-1);
+	if (tab->arg->flags[0] == '-')
+		align_left = 1;
+	if (tab->arg->prec == 0 && num == 0)
+		*str = '\0';
+	if (tab->arg->flags[1] == '0' && tab->arg->prec == -1 && !tab->arg->flags[0])
 	{
-		if (has_zero)
-			ft_putchar('0');
-		else
-			ft_putchar(' ');
-		width -= 1;
-		char_count++;
+		tab->arg->prec = tab->arg->width - 2;
+		tab->arg->width = 0;
 	}
-	return (char_count);
-}
-
-static int	ft_in_put_part_pointer(char *pointer, t_tab *tab)
-{
-	int char_count;
-
-	char_count = 0;
-	char_count += ft_putstrprec("0x", 2);
-	if (tab->arg->prec >= 0)
-	{
-		char_count += ft_treat_width(tab->arg->prec, ft_strlen(pointer), 1);
-		char_count += ft_putstrprec(pointer, tab->arg->prec);
-	}
-	else
-		char_count += ft_putstrprec(pointer, ft_strlen(pointer));
-	return (char_count);
-}
-
-t_tab		*handle_p(t_tab *tab)
-{
-	char				*pointer;
-	int					char_count;
-	unsigned long long	ull;
-
-	ull = (unsigned long long)(va_arg(tab->ap, unsigned long long));
-	char_count = 0;
-	if (ull == 0 && tab->arg->prec == 0)
-	{
-		char_count += ft_putstrprec("0x", 2);
-		char_count += ft_treat_width(tab->arg->width, 0, 1);
-		tab->len += char_count;
-		return (tab);
-	}
-	pointer = ft_convert_base_ll(ull, 16);
-	ft_strlow(pointer);
-	if ((size_t)tab->arg->prec < ft_strlen(pointer))
-		tab->arg->prec = ft_strlen(pointer);
-	if (tab->arg->flags[0] == 1)
-		char_count += ft_in_put_part_pointer(pointer, tab);
-	char_count += ft_treat_width(tab->arg->width, ft_strlen(pointer) + 2, 0);
-	if (tab->arg->flags[0] == 0)
-		char_count += ft_in_put_part_pointer(pointer, tab);
-	free(pointer);
-	tab->len += char_count;
+	print_u(tab, str, align_left);
 	return (tab);
 }
