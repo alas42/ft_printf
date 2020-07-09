@@ -6,7 +6,7 @@
 /*   By: avogt <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/21 16:19:33 by avogt             #+#    #+#             */
-/*   Updated: 2020/07/02 14:09:42 by avogt            ###   ########.fr       */
+/*   Updated: 2020/07/09 18:20:28 by avogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,7 @@ static int	fill_string(char *string, t_tab *tab, char *arg, long int len_arg)
 					string[i] = ' ';
 				i++;
 			}
-	if (fill_string_2(string, tab, arg, i))
-		return (1);
-	return (-1);
+	return (fill_string_2(string, tab, arg, i));
 }
 
 static char	*get_string_x(char *arg, t_tab *tab, long int len_arg)
@@ -73,10 +71,8 @@ static char	*get_string_x(char *arg, t_tab *tab, long int len_arg)
 		string = ft_strnew(tab->arg->prec);
 	else
 		string = ft_strnew(len_arg);
-	if (fill_string(string, tab, arg, len_arg))
-		return (string);
-	else
-		return (NULL);
+	fill_string(string, tab, arg, len_arg);
+	return (string);
 }
 
 t_tab		*handle_x(t_tab *tab)
@@ -88,20 +84,20 @@ t_tab		*handle_x(t_tab *tab)
 
 	len_to_print = 0;
 	num = (uintmax_t)((unsigned int)(va_arg(tab->ap, unsigned int)));
-	arg_to_print = ft_itoa_base(num, 16, 'a');
 	if (num == 0 && tab->arg->prec == 0)
 	{
 		display_char(tab, ' ', tab->arg->width, 1);
 		return (tab);
 	}
+	if (!(arg_to_print = ft_itoa_base(num, 16, 'a')))
+		exit(-1);
 	s = get_string_x(arg_to_print, tab, (long int)ft_strlen(arg_to_print));
 	len_to_print = ft_strlen(s);
 	if (tab->arg->specifier == 'X')
 		ft_strup(s);
-	else
-		ft_strlow(s);
 	ft_putstr(s);
 	tab->len += len_to_print;
+	free(arg_to_print);
 	free(s);
 	return (tab);
 }
