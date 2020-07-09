@@ -69,6 +69,7 @@ void				ft_putendl(const char *s);
 void				ft_putnbr(int n);
 void				ft_putnbr_u(unsigned int u, int precision, int zero);
 void				ft_putnbr_l(long int n);
+void				ft_putnbr_l_fd(long int n, int fd);
 void				ft_putnbr_ll(long long int u);
 void				ft_putnbr_prec(int n, int prec, int zero);
 void				ft_putnbr_ul(unsigned long int n);
