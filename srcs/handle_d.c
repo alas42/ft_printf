@@ -117,12 +117,10 @@ t_tab			*handle_d(t_tab *tab)
 	arg = va_arg(tab->ap, int);
 	arg_to_print = ft_itoa(arg);
 	string = get_string_d(arg_to_print, tab, arg);
-	if (string == NULL)
-		exit(-1);
 	len_to_print = ft_strlen(string);
 	ft_putstr(string);
 	tab->len += len_to_print;
-	free(&string);
-	free(&arg_to_print);
+	free(string);
+	free(arg_to_print);
 	return (tab);
 }
