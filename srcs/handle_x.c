@@ -88,8 +88,8 @@ t_tab		*handle_x(t_tab *tab)
 
 	len_to_print = 0;
 	num = (uintmax_t)((unsigned int)(va_arg(tab->ap, unsigned int)));
-	arg_to_print = ft_itoa_base(num, 16);
-	if (num == 0 && tab->precision == 0)
+	arg_to_print = ft_itoa_base(num, 16, 'a');
+	if (num == 0 && tab->arg->prec == 0)
 	{
 		display_char(tab, ' ', tab->arg->width, 1);
 		return (tab);
