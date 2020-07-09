@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static t_tab	*get_string_d(char *arg_to_print, t_tab *tab, int arg)
+static t_tab	*get_string_d(char *arg_to_print, t_tab *tab, long int arg)
 {
 	long int	placed;
 	long int	len_arg;
@@ -37,7 +37,7 @@ static t_tab	*get_string_d(char *arg_to_print, t_tab *tab, int arg)
 	if (arg_to_print[0] == '-')
 		write(1, &arg_to_print[0], 1);
 	display_char(tab, '0', tab->arg->prec - len_arg, 0);
-	ft_putnbr_fd(arg, 1);
+	ft_putnbr_l_fd(arg, 1);
 	if (tab->arg->flags[0])
 		display_char(tab, ' ', tab->arg->width - placed, 0);
 	return (tab);
@@ -45,12 +45,12 @@ static t_tab	*get_string_d(char *arg_to_print, t_tab *tab, int arg)
 
 t_tab			*handle_d(t_tab *tab)
 {
-	int			arg;
+	long int	arg;
 	char		*arg_to_print;
 	size_t		len_to_print;
 
 	len_to_print = 0;
-	arg = va_arg(tab->ap, int);
+	arg = (long int)va_arg(tab->ap, int);
 	arg_to_print = ft_itoa(arg);
 	if (arg == 0 && tab->arg->prec == 0)
 	{

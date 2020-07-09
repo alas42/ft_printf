@@ -53,3 +53,24 @@ void	ft_putnbr_ll(long long int n)
 		ft_putnbr_ll(n % 10);
 	}
 }
+
+void	ft_putnbr_l_fd(long int n, int fd)
+{
+	if (n == LONG_MIN)
+	{
+		ft_putstr_fd("-9223372036854775808", fd);
+		return ;
+	}
+	if (n >= 0 && n < 10)
+		ft_putchar_fd(n + 48, fd);
+	else if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		ft_putnbr_l_fd(n * -1, fd);
+	}
+	else
+	{
+		ft_putnbr_l_fd(n / 10, fd);
+		ft_putnbr_l_fd(n % 10, fd);
+	}
+}
