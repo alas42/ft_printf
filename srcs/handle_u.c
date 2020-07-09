@@ -92,6 +92,7 @@ t_tab		*handle_u(t_tab *tab)
 		exit(-1);
 	len_to_print = ft_strlen(s);
 	ft_putstr(s);
+	tab->len += len_to_print;
 	free(s);
 	free(arg_to_print);
 	return (tab);

@@ -80,6 +80,7 @@ t_tab		*handle_p(t_tab *tab)
 	ft_strlow(s);
 	len_to_print = ft_strlen(s);
 	ft_putstr(s);
+	tab->len += len_to_print;
 	free(s);
 	return (tab);
 }

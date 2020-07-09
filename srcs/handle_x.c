@@ -96,6 +96,7 @@ t_tab		*handle_x(t_tab *tab)
 	else
 		ft_strlow(s);
 	ft_putstr(s);
+	tab->len += len_to_print;
 	free(s);
 	return (tab);
 }
