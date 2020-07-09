@@ -81,15 +81,20 @@ static char	*get_string_x(char *arg, t_tab *tab, long int len_arg)
 
 t_tab		*handle_x(t_tab *tab)
 {
-	char	*arg_to_print;
-	char	*s;
-	size_t	len_to_print;
+	char		*arg_to_print;
+	char		*s;
+	size_t		len_to_print;
+	uintmax_t	num;
 
 	len_to_print = 0;
-	arg_to_print = ft_convert_base(va_arg(tab->ap, unsigned int), 16);
+	num = (unsigned int)(va_arg(tab->ap, unsigned int));
+	arg_to_print = ft_convert_base(num, 16);
+	if (num == 0 && tab->precision == 0)
+	{
+		display_char(tab, ' ', tab->arg->width, 1);
+		return (tab);
+	}
 	s = get_string_x(arg_to_print, tab, (long int)ft_strlen(arg_to_print));
-	if (s == NULL)
-		exit(-1);
 	len_to_print = ft_strlen(s);
 	if (tab->arg->specifier == 'X')
 		ft_strup(s);
