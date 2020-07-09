@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static t_tab		*print_u(t_tab *tab, char *str, int align_left)
+static t_tab		*display_string_u(t_tab *tab, char *str, int align_left)
 {
 	int			not_blank;
 	int			num_width;
