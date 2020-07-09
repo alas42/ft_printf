@@ -34,11 +34,6 @@ t_tab		*handle_s(t_tab *tab)
 
 	i = 0;
 	s = va_arg(tab->ap, char *);
-	if (tab->arg->width < 0)
-	{
-		tab->arg->width *= -1;
-		tab->arg->flags[0] = 1;
-	}
 	s = ft_get_s(s, tab);
 	len = ft_strlen(s);
 	tab->len += len;
