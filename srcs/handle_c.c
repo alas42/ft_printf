@@ -17,9 +17,13 @@ t_tab	*handle_c(t_tab *tab)
 	char		c;
 
 	c = (char)va_arg(tab->ap, int);
+	if (tab->arg->width < 0)
+	{
+		tab->arg->width *= -1;
+		tab->arg->flags[0] = 1;
+	}
 	if (tab->arg->flags[0])
 		write(1, &c, 1);
-	printf("width : %ld\n", tab->arg->width);
 	while (tab->arg->width - 1 > 0)
 	{
 		ft_putchar(' ');
