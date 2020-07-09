@@ -37,12 +37,12 @@ t_tab		*handle_s(t_tab *tab)
 	s = ft_get_s(s, tab);
 	len = ft_strlen(s);
 	tab->len += len;
-	if (tab->arg->flags[1] == '0' && tab->arg->flags[0] != '-')
+	if (tab->arg->flags[1] && !tab->arg->flags[0])
 		display_char(tab, '0', tab->arg->width - len, 1);
-	else if (tab->arg->flags[0] != '-')
+	else if (!tab->arg->flags[0])
 		display_char(tab, ' ', tab->arg->width - len, 1);
 	ft_putstr(s);
-	if (tab->arg->flags[0] == '-')
+	if (tab->arg->flags[0])
 		display_char(tab, ' ', tab->arg->width - len, 1);
 	free(s);
 	return (tab);
