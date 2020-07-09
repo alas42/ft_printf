@@ -19,7 +19,7 @@ t_tab		*handle_s(t_tab *tab)
 	int			len;
 
 	i = 0;
-	s = va_arg(tab->args, char *);
+	s = va_arg(tab->ap, char *);
 	if (tab->arg->prec > -1 && s)
 		s = ft_strndup(s, tab->arg->prec);
 	else if (tab->arg->prec == -1 && s)
@@ -30,12 +30,12 @@ t_tab		*handle_s(t_tab *tab)
 		s = ft_strdup("(null)");
 	len = ft_strlen(s);
 	tab->len += len;
-	if (tab->convert[3] == '0' && tab->convert[0] != '-')
+	if (tab->arg->flags[1] == '0' && tab->arg->flags[0] != '-')
 		display_char(tab, '0', tab->arg->width - len, 1);
-	else if (tab->convert[0] != '-')
+	else if (tab->arg->flags[0] != '-')
 		display_char(tab, ' ', tab->arg->width - len, 1);
 	ft_putstr(s);
-	if (tab->convert[0] == '-')
+	if (tab->arg->flags[0] == '-')
 		display_char(tab, ' ', tab->arg->width - len, 1);
 	free(s);
 	return (tab);
