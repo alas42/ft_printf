@@ -58,19 +58,16 @@ static t_tab	*fill_1(char *string, t_tab *tab, char *arg, long int len_arg)
 	return (fill_2(string, tab, arg, i));
 }
 
-static char		*get_string_u(char *arg, t_tab *tab, long int len_arg)
+static char		*get_string_u(char *s char *arg, t_tab *tab, long int len_arg)
 {
-	char	*string;
-
-	string = NULL;
 	if (tab->arg->width >= tab->arg->prec && tab->arg->width > len_arg)
-		string = ft_strnew(tab->arg->width);
+		s = ft_strnew(tab->arg->width);
 	else if (tab->arg->width < tab->arg->prec && tab->arg->prec > len_arg)
-		string = ft_strnew(tab->arg->prec);
+		s = ft_strnew(tab->arg->prec);
 	else
-		string = ft_strnew(len_arg);
-	fill_1(string, tab, arg, len_arg);
-	return (string);
+		s = ft_strnew(len_arg);
+	fill_1(s, tab, arg, len_arg);
+	return (s);
 }
 
 t_tab			*handle_u(t_tab *tab)
@@ -83,12 +80,13 @@ t_tab			*handle_u(t_tab *tab)
 	num = (unsigned int)(va_arg(tab->ap, unsigned int));
 	len_to_print = 0;
 	arg_to_print = ft_itoa_umax(num);
+	s = NULL;
 	if (num == 0 && tab->arg->prec == 0)
 	{
 		display_char(tab, ' ', tab->arg->width, 1);
 		return (tab);
 	}
-	s = get_string_u(arg_to_print, tab, (long int)ft_strlen(arg_to_print));
+	s = get_string_u(s, arg_to_print, tab, (long int)ft_strlen(arg_to_print));
 	len_to_print = ft_strlen(s);
 	ft_putstr(s);
 	tab->len += len_to_print;
