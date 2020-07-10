@@ -66,6 +66,7 @@ int		ft_printf(const char *format, ...)
 		tab->len = parse_format(tab);
 		va_end(tab->ap);
 	}
+	free(tab->arg);
 	free(tab);
 	return (tab->len);
 }
