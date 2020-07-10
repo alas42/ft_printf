@@ -21,7 +21,7 @@
 
 typedef struct	s_arg
 {
-	char		flags[2];
+	int			flags[2];
 	long int	width;
 	long int	prec;
 	char		specifier;

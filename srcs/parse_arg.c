@@ -24,12 +24,12 @@ t_tab	*check_flags(t_tab *tab)
 		{
 			while (tab->f_copy2[tab->i] == '-')
 			{
-				tab->arg->flags[0] = '-';
+				tab->arg->flags[0] = 1;
 				tab->i++;
 			}
 			while (tab->f_copy2[tab->i] == '0')
 			{
-				tab->arg->flags[1] = '0';
+				tab->arg->flags[1] = 1;
 				tab->i++;
 			}
 			i = 0;
