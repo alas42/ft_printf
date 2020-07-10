@@ -44,9 +44,8 @@ static int	fill_string(char *string, t_tab *tab, char *arg, long int len_arg)
 	long int i;
 
 	i = 0;
-	if (tab->arg->flags[0] == 0)
-		if (tab->arg->width > len_arg
-			&& tab->arg->width > tab->arg->prec)
+	if (!tab->arg->flags[0])
+		if (tab->arg->width > len_arg && tab->arg->width > tab->arg->prec)
 			while (i < tab->arg->width - len_arg)
 			{
 				if (tab->arg->flags[1] && tab->arg->prec == -1)
@@ -63,11 +62,9 @@ static char	*get_string_x(char *arg, t_tab *tab, long int len_arg)
 	char	*string;
 
 	string = NULL;
-	if (tab->arg->width >= tab->arg->prec
-		&& tab->arg->width > len_arg)
+	if (tab->arg->width >= tab->arg->prec && tab->arg->width > len_arg)
 		string = ft_strnew(tab->arg->width);
-	else if (tab->arg->width < tab->arg->prec
-		&& tab->arg->prec > len_arg)
+	else if (tab->arg->width < tab->arg->prec && tab->arg->prec > len_arg)
 		string = ft_strnew(tab->arg->prec);
 	else
 		string = ft_strnew(len_arg);
