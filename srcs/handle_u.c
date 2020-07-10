@@ -58,7 +58,7 @@ static t_tab	*fill_1(char *string, t_tab *tab, char *arg, long int len_arg)
 	return (fill_2(string, tab, arg, i));
 }
 
-static char		*get_string_u(char *s char *arg, t_tab *tab, long int len_arg)
+static char		*get_string_u(char *s, char *arg, t_tab *tab, long int len_arg)
 {
 	if (tab->arg->width >= tab->arg->prec && tab->arg->width > len_arg)
 		s = ft_strnew(tab->arg->width);
