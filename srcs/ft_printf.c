@@ -6,7 +6,7 @@
 /*   By: avogt <avogt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 16:43:31 by avogt             #+#    #+#             */
-/*   Updated: 2020/07/09 19:21:28 by avogt            ###   ########.fr       */
+/*   Updated: 2020/07/10 13:45:35 by avogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int		ft_printf(const char *format, ...)
 	tab->format = format;
 	tab->i = 0;
 	tab->len = 0;
+	tab->arg = NULL;
 	tab->f_copy = (char *)tab->format;
 	tab->f_copy2 = (char *)tab->format;
 	if (format)
